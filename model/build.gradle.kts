@@ -1,4 +1,3 @@
-import org.gradle.api.JavaVersion.VERSION_1_8
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.repositories

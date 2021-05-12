@@ -1,12 +1,10 @@
 package io.github.droidkaigi.confsched2018.presentation
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
-import androidx.multidex.MultiDex
 import com.google.firebase.FirebaseApp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -34,11 +32,6 @@ open class App : DaggerApplication() {
         setupCalligraphy()
         setupEmoji()
         setupNotification()
-    }
-
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(base)
-        MultiDex.install(this)
     }
 
     private fun setupFirebase() {

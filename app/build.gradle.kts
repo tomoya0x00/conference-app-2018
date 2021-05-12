@@ -105,7 +105,13 @@ android {
         textReport = true
         textOutput("stdout")
     }
-
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 kapt {
@@ -118,19 +124,7 @@ dependencies {
 
     // Kotlin
     implementation(Depends.Kotlin.stdlib)
-    implementation(Depends.ktx)
-
-//    //==================== Support Library ====================
-    implementation(Depends.Support.support_v4)
-    implementation(Depends.Support.appcompat_v7)
-    implementation(Depends.Support.design)
-    implementation(Depends.Support.cardview_v7)
-    implementation(Depends.Support.customtabs)
-    implementation(Depends.Support.constraint)
-    implementation(Depends.Support.multidex)
-    implementation(Depends.Support.support_emoji)
-    implementation(Depends.Support.preference_v7)
-    implementation(Depends.Support.preference_v14)
+    implementation(Depends.AndroidX.core)
 
 //==================== Network ====================
     implementation(Depends.OkHttp3.loggingIntercepter)
@@ -139,17 +133,25 @@ dependencies {
     implementation(Depends.Retrofit.converterMoshi)
     implementation(Depends.Retrofit.adapterRxJava2)
 
-//==================== Structure ====================
-    implementation(Depends.Kotshi.api)
-    implementation("com.google.android.material:material:1.3.0")
-    kapt(Depends.Kotshi.compiler)
+//==================== AndroidX ====================
 
-    implementation(Depends.LifeCycle.runtime)
-    implementation(Depends.LifeCycle.extensions)
-    implementation(Depends.LifeCycle.reactivestreams)
+    implementation(Depends.AndroidX.fragment)
+    implementation(Depends.AndroidX.activity)
+    implementation(Depends.AndroidX.lifecycle)
+    implementation(Depends.AndroidX.viewModel)
+    implementation(Depends.AndroidX.reactivestreams)
+    implementation(Depends.AndroidX.browser)
+    implementation(Depends.AndroidX.constraint)
+    implementation(Depends.AndroidX.emoji)
     implementation(Depends.AndroidX.Room.runtime)
     implementation(Depends.AndroidX.Room.rxjava2)
     kapt(Depends.AndroidX.Room.compiler)
+
+//==================== Structure ====================
+    implementation(Depends.Kotshi.api)
+    kapt(Depends.Kotshi.compiler)
+
+    implementation(Depends.material)
 
     implementation(Depends.RxJava2.core)
     implementation(Depends.RxJava2.android)

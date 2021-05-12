@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.view.forEach
+import androidx.core.view.forEach
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView

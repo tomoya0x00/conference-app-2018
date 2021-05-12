@@ -1,6 +1,6 @@
 object Versions {
     const val compileSdk = 30
-    const val minSdk = 19
+    const val minSdk = 23
     const val targetSdk = 27
     const val gradleBuildTool = "4.2.0"
     const val kotlin = "1.4.30"
@@ -12,7 +12,7 @@ object Versions {
     const val supportLibrary = "27.0.2"
     const val retrofit = "2.3.0"
     const val kotshi = "0.3.0"
-    const val archLifecycle = "1.1.0"
+    const val lifecycle = "2.3.1"
     const val room = "2.3.0"
     const val dagger = "2.35.1"
     const val firebase = "11.8.0"

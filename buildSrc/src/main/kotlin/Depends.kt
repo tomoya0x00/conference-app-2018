@@ -3,21 +3,6 @@ object Depends {
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     }
 
-    object Support {
-        val support_v4 = "com.android.support:support-v4:${Versions.supportLibrary}"
-        val appcompat_v7 = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
-        val design = "com.android.support:design:${Versions.supportLibrary}"
-        val cardview_v7 = "com.android.support:cardview-v7:${Versions.supportLibrary}"
-        val customtabs = "com.android.support:customtabs:${Versions.supportLibrary}"
-        val constraint = "com.android.support.constraint:constraint-layout:1.1.0-beta4"
-        val multidex = "com.android.support:multidex:1.0.2"
-        val support_emoji = "com.android.support:support-emoji-appcompat:${Versions.supportLibrary}"
-        val preference_v7 = "com.android.support:preference-v7:${Versions.supportLibrary}"
-        val preference_v14 = "com.android.support:preference-v14:${Versions.supportLibrary}"
-    }
-    
-    val ktx = "androidx.core:core-ktx:0.1"
-
     object OkHttp3 {
         val loggingIntercepter = "com.squareup.okhttp3:logging-interceptor:3.9.1"
     }
@@ -33,19 +18,25 @@ object Depends {
         val compiler = "se.ansman.kotshi:compiler:${Versions.kotshi}"
     }
 
-    object LifeCycle {
-        val runtime = "android.arch.lifecycle:runtime:${Versions.archLifecycle}"
-        val extensions = "android.arch.lifecycle:extensions:${Versions.archLifecycle}"
-        val reactivestreams = "android.arch.lifecycle:reactivestreams:${Versions.archLifecycle}"
-    }
-
     object AndroidX {
+        const val core = "androidx.core:core-ktx:1.5.0-rc02"
+        const val fragment = "androidx.fragment:fragment-ktx:1.3.3"
+        const val activity = "androidx.activity:activity-ktx:1.2.3"
+        const val viewModel =  "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val reactivestreams =  "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
+        const val browser = "androidx.browser:browser:1.3.0"
+        const val constraint = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val emoji = "androidx.emoji:emoji-appcompat:1.1.0"
+
         object Room {
-            val runtime = "androidx.room:room-runtime:${Versions.room}"
-            val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
-            val compiler = "androidx.room:room-compiler:${Versions.room}"
+            const val runtime = "androidx.room:room-runtime:${Versions.room}"
+            const val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
+            const val compiler = "androidx.room:room-compiler:${Versions.room}"
         }
     }
+
+    const val material = "com.google.android.material:material:1.3.0"
 
     object RxJava2 {
         val core = "io.reactivex.rxjava2:rxjava:2.1.9"
@@ -131,7 +122,4 @@ object Depends {
         val contrib = "com.android.support.test.espresso:espresso-contrib:3.0.1"
 
     }
-
-
 }
-

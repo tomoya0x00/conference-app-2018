@@ -6,9 +6,9 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.net.toUri
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.presentation.common.fragment.Findable
 import io.github.droidkaigi.confsched2018.presentation.sessions.AllSessionsFragment
@@ -86,7 +86,7 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
 
     private fun tryUsingCustomTabs(customTabsPackageName: String?,
                                    customTabsIntent: CustomTabsIntent,
-                                   webUri: Uri?): Boolean {
+                                   webUri: Uri): Boolean {
         customTabsPackageName?.let {
             customTabsIntent.intent.`package` = customTabsPackageName
             customTabsIntent.launchUrl(activity, webUri)
