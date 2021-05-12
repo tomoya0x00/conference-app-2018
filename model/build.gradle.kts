@@ -21,5 +21,10 @@ apply {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8", Versions.kotlin))
+    implementation(kotlin("stdlib-jdk8", Versions.kotlin))
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }

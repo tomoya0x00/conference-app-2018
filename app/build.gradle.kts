@@ -1,13 +1,4 @@
 import com.android.build.gradle.api.ApplicationVariant
-import de.triplet.gradle.play.PlayAccountConfig
-import groovy.lang.Closure
-import org.apache.tools.ant.types.optional.depend.DependScanner
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.kotlin
-import org.gradle.kotlin.dsl.repositories
-import org.gradle.kotlin.dsl.version
-import org.gradle.kotlin.dsl.*
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
@@ -30,7 +21,10 @@ val versionPatch = 0
 
 android {
     compileSdkVersion(Versions.compileSdk)
-    dataBinding.isEnabled = true
+
+    buildFeatures {
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId = "io.github.droidkaigi.confsched2018"
