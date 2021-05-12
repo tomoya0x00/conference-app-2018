@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.util.ext
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.google.android.gms.tasks.Task
 import io.reactivex.Completable
 import io.reactivex.Single

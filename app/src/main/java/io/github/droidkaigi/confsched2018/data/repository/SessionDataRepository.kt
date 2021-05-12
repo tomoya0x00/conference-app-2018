@@ -1,7 +1,7 @@
 package io.github.droidkaigi.confsched2018.data.repository
 
-import android.support.annotation.CheckResult
-import android.support.annotation.VisibleForTesting
+import androidx.annotation.CheckResult
+import androidx.annotation.VisibleForTesting
 import io.github.droidkaigi.confsched2018.data.api.DroidKaigiApi
 import io.github.droidkaigi.confsched2018.data.db.FavoriteDatabase
 import io.github.droidkaigi.confsched2018.data.db.SessionDatabase

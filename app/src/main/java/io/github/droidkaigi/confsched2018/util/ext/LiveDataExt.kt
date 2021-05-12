@@ -1,9 +1,10 @@
 package io.github.droidkaigi.confsched2018.util.ext
 
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.Transformations
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
+
 
 inline fun <T> LiveData<T>.observe(
         owner: LifecycleOwner,

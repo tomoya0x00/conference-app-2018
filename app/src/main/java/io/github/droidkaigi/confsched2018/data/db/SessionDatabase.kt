@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.data.db
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import io.github.droidkaigi.confsched2018.data.api.response.Response
 import io.github.droidkaigi.confsched2018.data.db.entity.RoomEntity
 import io.github.droidkaigi.confsched2018.data.db.entity.SessionWithSpeakers

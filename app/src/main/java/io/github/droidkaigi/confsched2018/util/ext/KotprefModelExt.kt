@@ -1,8 +1,8 @@
 package io.github.droidkaigi.confsched2018.util.ext
 
 import android.content.SharedPreferences
-import android.support.annotation.CheckResult
-import android.support.annotation.StringRes
+import androidx.annotation.CheckResult
+import androidx.annotation.StringRes
 import com.chibatching.kotpref.KotprefModel
 import io.github.droidkaigi.confsched2018.presentation.common.pref.Prefs
 import io.reactivex.BackpressureStrategy

@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.util
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import io.github.droidkaigi.confsched2018.util.ext.toSingle

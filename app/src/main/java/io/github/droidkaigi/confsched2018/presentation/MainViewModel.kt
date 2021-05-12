@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.presentation
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 

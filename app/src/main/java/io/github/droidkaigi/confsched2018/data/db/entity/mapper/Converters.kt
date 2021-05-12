@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.data.db.entity.mapper
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import org.threeten.bp.Instant
 
 object Converters {

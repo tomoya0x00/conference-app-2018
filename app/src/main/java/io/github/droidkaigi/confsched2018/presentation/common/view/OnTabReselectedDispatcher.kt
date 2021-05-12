@@ -1,7 +1,8 @@
 package io.github.droidkaigi.confsched2018.presentation.common.view
 
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
+
 
 class OnTabReselectedDispatcher(
         private val viewPager: ViewPager

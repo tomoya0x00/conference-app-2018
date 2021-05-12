@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.util
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.DocumentSnapshot

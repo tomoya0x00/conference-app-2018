@@ -24,7 +24,7 @@
             />
     </data>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -39,7 +39,7 @@
         tools:targetApi="lollipop"
         >
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
@@ -119,7 +119,7 @@
                 tools:text=" / Room A"
                 />
 
-            <android.support.text.emoji.widget.EmojiTextView
+            <androidx.emoji.widget.EmojiTextView
                 android:id="@+id/title"
                 style="@style/TextStyle.App.Title"
                 android:layout_width="0dp"
@@ -137,7 +137,7 @@
                 tools:text="テストセッション"
                 />
 
-            <android.support.text.emoji.widget.EmojiTextView
+            <androidx.emoji.widget.EmojiTextView
                 android:id="@+id/description"
                 style="@style/TextStyle.App.Caption"
                 android:layout_width="0dp"
@@ -158,7 +158,7 @@
                 tools:text="Material is the metaphor A material metaphor is the unifying theory of a rationalized space and a system of motion. The material is grounded in tactile reality, inspired by the study of paper and ink, yet technologically advanced and open to imagination and magic."
                 />
 
-            <android.support.text.emoji.widget.EmojiTextView
+            <androidx.emoji.widget.EmojiTextView
                 android:id="@+id/message"
                 style="@style/TextStyle.App.Body2"
                 android:layout_width="0dp"
@@ -275,6 +275,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

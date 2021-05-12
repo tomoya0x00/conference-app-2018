@@ -1,10 +1,10 @@
 package io.github.droidkaigi.confsched2018.presentation.common.view
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import io.github.droidkaigi.confsched2018.databinding.ItemSpeakersSummaryLayoutBinding
 import io.github.droidkaigi.confsched2018.model.Speaker
 import io.github.droidkaigi.confsched2018.util.DebouncingOnClickListener
@@ -13,8 +13,8 @@ class SpeakersAdapter(var context: Context, var speakerList: List<Speaker>, val 
         RecyclerView.Adapter<SpeakersAdapter.BindingHolder>() {
     var onSpeakerClick: (view: View, speakerId: String) -> Unit = { _, _ -> }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): BindingHolder? {
-        val layoutInflater = LayoutInflater.from(parent!!.context)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemSpeakersSummaryLayoutBinding.inflate(layoutInflater, parent, false)
         return BindingHolder(binding)
     }

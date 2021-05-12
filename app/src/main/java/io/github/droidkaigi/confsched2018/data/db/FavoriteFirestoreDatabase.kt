@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.data.db
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore

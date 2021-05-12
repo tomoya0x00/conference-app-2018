@@ -6,14 +6,14 @@
 
     <data></data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sessions_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipChildren="false"
         >
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/sessions_recycler"
             style="@style/BaseRecyclerView"
             android:layout_width="0dp"
@@ -23,7 +23,7 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/session_recycler_bottom_padding"
             android:paddingTop="@dimen/session_recycler_top_padding"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,5 +54,5 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

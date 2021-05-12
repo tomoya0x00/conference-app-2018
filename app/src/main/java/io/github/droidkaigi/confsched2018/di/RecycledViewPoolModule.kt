@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.di
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import dagger.Module
 import dagger.Provides
 

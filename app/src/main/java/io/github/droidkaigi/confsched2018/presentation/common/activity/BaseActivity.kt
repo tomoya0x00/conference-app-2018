@@ -5,7 +5,7 @@ import android.app.ActivityManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import dagger.android.support.DaggerAppCompatActivity
 import io.github.droidkaigi.confsched2018.R
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper

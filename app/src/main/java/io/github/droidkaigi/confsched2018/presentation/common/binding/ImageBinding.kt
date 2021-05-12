@@ -1,13 +1,13 @@
 package io.github.droidkaigi.confsched2018.presentation.common.binding
 
-import android.databinding.BindingAdapter
-import android.databinding.BindingMethod
-import android.databinding.BindingMethods
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.text.TextUtils
 import android.widget.ImageView
+import androidx.annotation.ColorInt
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.util.CustomGlideApp

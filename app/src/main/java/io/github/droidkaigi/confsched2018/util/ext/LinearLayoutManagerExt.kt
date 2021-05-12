@@ -2,12 +2,12 @@ package io.github.droidkaigi.confsched2018.util.ext
 
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 
 fun LinearLayoutManager.getScrollState(): ScrollState {
     val savedState = onSaveInstanceState()
     val parcel = Parcel.obtain()
-    savedState.writeToParcel(parcel, Parcelable.PARCELABLE_WRITE_RETURN_VALUE)
+    savedState?.writeToParcel(parcel, Parcelable.PARCELABLE_WRITE_RETURN_VALUE)
     parcel.setDataPosition(0)
 
     val scrollState = ScrollState(

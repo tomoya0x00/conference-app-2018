@@ -1,6 +1,6 @@
 object Depends {
     object Kotlin {
-        val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+        val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     }
 
     object Support {
@@ -39,10 +39,12 @@ object Depends {
         val reactivestreams = "android.arch.lifecycle:reactivestreams:${Versions.archLifecycle}"
     }
 
-    object Room {
-        val runtime = "android.arch.persistence.room:runtime:${Versions.archRoom}"
-        val rxjava2 = "android.arch.persistence.room:rxjava2:${Versions.archRoom}"
-        val compiler = "android.arch.persistence.room:compiler:${Versions.archRoom}"
+    object AndroidX {
+        object Room {
+            val runtime = "androidx.room:room-runtime:${Versions.room}"
+            val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
+            val compiler = "androidx.room:room-compiler:${Versions.room}"
+        }
     }
 
     object RxJava2 {

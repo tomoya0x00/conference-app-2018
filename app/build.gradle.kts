@@ -8,7 +8,7 @@ import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.repositories
 import org.gradle.kotlin.dsl.version
 import org.gradle.kotlin.dsl.*
-import org.jlleitschuh.gradle.ktlint.ReporterType
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     id("com.android.application") version Versions.gradleBuildTool
@@ -30,7 +30,6 @@ val versionPatch = 0
 
 android {
     compileSdkVersion(Versions.compileSdk)
-    buildToolsVersion(Versions.buildTools)
     dataBinding.isEnabled = true
 
     defaultConfig {
@@ -46,7 +45,7 @@ android {
 
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = mapOf("room.schemaLocation" to "$projectDir/schemas")
+                arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
             }
         }
     }
@@ -72,14 +71,15 @@ android {
     }
     buildTypes {
         getByName("debug") {
-            manifestPlaceholders = mapOf("scheme" to "conference", "host" to "droidkaigi.co.jp.debug")
+            manifestPlaceholders += mapOf("scheme" to "conference", "host" to "droidkaigi.co.jp" +
+                    ".debug")
             resValue("string", "app_name", "DroidKaigi 2018 Dev")
             signingConfig = signingConfigs.getByName("debug")
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
         }
         getByName("release") {
-            manifestPlaceholders = mapOf("scheme" to "conference", "host" to "droidkaigi.co.jp")
+            manifestPlaceholders += mapOf("scheme" to "conference", "host" to "droidkaigi.co.jp")
             resValue("string", "app_name", "DroidKaigi 2018")
             signingConfig = signingConfigs.getByName("release")
             isDebuggable = false
@@ -141,14 +141,15 @@ dependencies {
 
 //==================== Structure ====================
     implementation(Depends.Kotshi.api)
+    implementation("com.google.android.material:material:1.3.0")
     kapt(Depends.Kotshi.compiler)
 
     implementation(Depends.LifeCycle.runtime)
     implementation(Depends.LifeCycle.extensions)
     implementation(Depends.LifeCycle.reactivestreams)
-    implementation(Depends.Room.runtime)
-    implementation(Depends.Room.rxjava2)
-    kapt(Depends.Room.compiler)
+    implementation(Depends.AndroidX.Room.runtime)
+    implementation(Depends.AndroidX.Room.rxjava2)
+    kapt(Depends.AndroidX.Room.compiler)
 
     implementation(Depends.RxJava2.core)
     implementation(Depends.RxJava2.android)
@@ -231,10 +232,12 @@ play {
 }
 
 ktlint {
-    version = Versions.ktlint
-    android = true
-    reporter = ReporterType.CHECKSTYLE
-    ignoreFailures = true
+    version.set(Versions.ktlint)
+    android.set(true)
+    reporters {
+        reporter(ReporterType.CHECKSTYLE)
+    }
+    ignoreFailures.set(true)
 }
 
 apply(mapOf("plugin" to "com.google.gms.google-services"))

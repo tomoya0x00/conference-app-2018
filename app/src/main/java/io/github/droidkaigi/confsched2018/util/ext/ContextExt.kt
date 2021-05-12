@@ -3,12 +3,12 @@ package io.github.droidkaigi.confsched2018.util.ext
 import android.content.Context
 import android.graphics.Point
 import android.graphics.drawable.Drawable
-import android.support.annotation.BoolRes
-import android.support.annotation.ColorRes
-import android.support.annotation.DrawableRes
-import android.support.annotation.IntegerRes
-import android.support.v4.content.ContextCompat
 import android.view.WindowManager
+import androidx.annotation.BoolRes
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
+import androidx.annotation.IntegerRes
+import androidx.core.content.ContextCompat
 
 fun Context.displaySize(): Size {
     val point = Point()

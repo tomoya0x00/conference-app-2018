@@ -1,10 +1,11 @@
 package io.github.droidkaigi.confsched2018.util.ext
 
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+
 
 inline fun RecyclerView.addOnScrollListener(
         crossinline onScrollStateChanged: (recyclerView: RecyclerView?, newState: Int) -> Unit =
@@ -13,12 +14,12 @@ inline fun RecyclerView.addOnScrollListener(
         { _, _, _ -> }
 ) {
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             onScrollStateChanged(recyclerView, newState)
         }
 
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             onScrolled(recyclerView, dx, dy)
         }

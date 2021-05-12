@@ -25,8 +25,8 @@ pluginManagement {
                 case 'com.github.triplet.play':
                     useModule("com.github.triplet.gradle:play-publisher:${requested.version}")
                     break
-                case "org.jlleitschuh.gradle.ktlint":
-                    useModule("gradle.plugin.org.jlleitschuh.gradle:ktlint-gradle:${requested.version}")
+                case "org.jlleitschuh.gradle":
+                    useModule("org.jlleitschuh.gradle:ktlint-gradle:${requested.version}")
                     break
                 case 'io.fabric':
                     useModule("io.fabric.tools:gradle:${requested.version}")

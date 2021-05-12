@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.data.db.entity
 
-import android.arch.persistence.room.ColumnInfo
+import androidx.room.ColumnInfo
 
 data class RoomEntity(
         @ColumnInfo(name = "room_id")

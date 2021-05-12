@@ -3,7 +3,7 @@ package io.github.droidkaigi.confsched2018.presentation.common.notification
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.support.v4.app.TaskStackBuilder
+import androidx.core.app.TaskStackBuilder
 import io.github.droidkaigi.confsched2018.presentation.MainActivity
 
 sealed class NotificationContent(
@@ -49,9 +49,9 @@ sealed class NotificationContent(
         companion object {
             fun parse(intent: Intent): FavoriteSessionStart {
                 return FavoriteSessionStart(
-                        intent.getStringExtra(EXTRA_TITLE),
-                        intent.getStringExtra(EXTRA_TEXT),
-                        intent.getStringExtra(EXTRA_SESSION_ID)
+                        intent.getStringExtra(EXTRA_TITLE) ?: "",
+                        intent.getStringExtra(EXTRA_TEXT) ?: "",
+                        intent.getStringExtra(EXTRA_SESSION_ID) ?: ""
                 )
             }
         }

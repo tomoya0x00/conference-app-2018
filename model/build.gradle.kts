@@ -1,9 +1,8 @@
-import org.gradle.api.JavaVersion.VERSION_1_7
+import org.gradle.api.JavaVersion.VERSION_1_8
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.kotlin
 import org.gradle.kotlin.dsl.repositories
 import org.gradle.kotlin.dsl.version
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
@@ -23,10 +22,5 @@ apply {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jre7", Versions.kotlin))
-}
-
-java {
-    sourceCompatibility = VERSION_1_7
-    targetCompatibility = VERSION_1_7
+    compile(kotlin("stdlib-jdk8", Versions.kotlin))
 }

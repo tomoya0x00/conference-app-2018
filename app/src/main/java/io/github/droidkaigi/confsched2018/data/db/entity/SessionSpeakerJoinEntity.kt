@@ -1,9 +1,9 @@
 package io.github.droidkaigi.confsched2018.data.db.entity
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ForeignKey
-import android.arch.persistence.room.ForeignKey.CASCADE
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 
 @Entity(tableName = "session_speaker_join", primaryKeys = ["sessionId", "speakerId"],
         foreignKeys = [

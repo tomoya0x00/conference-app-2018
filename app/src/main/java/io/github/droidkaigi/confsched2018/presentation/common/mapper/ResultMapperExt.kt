@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.presentation.common.mapper
 
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
 import io.github.droidkaigi.confsched2018.presentation.Result
 import io.github.droidkaigi.confsched2018.util.rx.SchedulerProvider
 import io.reactivex.Completable

@@ -2,9 +2,9 @@ package io.github.droidkaigi.confsched2018.presentation.common.view
 
 import android.content.Context
 import android.graphics.drawable.Animatable
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.Checkable
+import androidx.appcompat.widget.AppCompatImageView
 import io.github.droidkaigi.confsched2018.R
 
 class FavoriteButton @JvmOverloads constructor(

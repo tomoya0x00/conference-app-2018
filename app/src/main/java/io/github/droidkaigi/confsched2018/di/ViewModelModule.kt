@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.di
 
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 

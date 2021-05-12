@@ -2,12 +2,10 @@ package io.github.droidkaigi.confsched2018.presentation.common.binding
 
 import android.app.SearchManager
 import android.content.Intent
-import android.databinding.BindingAdapter
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.os.Build
-import android.support.v4.content.ContextCompat
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.BackgroundColorSpan
@@ -16,6 +14,8 @@ import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.databinding.BindingAdapter
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.util.ext.isLayoutDirectionRtl
 import io.github.droidkaigi.confsched2018.util.ext.selectedText

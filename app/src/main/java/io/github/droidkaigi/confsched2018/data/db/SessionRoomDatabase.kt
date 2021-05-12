@@ -1,7 +1,7 @@
 package io.github.droidkaigi.confsched2018.data.db
 
-import android.arch.persistence.room.RoomDatabase
-import android.support.annotation.CheckResult
+import androidx.annotation.CheckResult
+import androidx.room.RoomDatabase
 import io.github.droidkaigi.confsched2018.data.api.response.Response
 import io.github.droidkaigi.confsched2018.data.api.response.mapper.toSessionEntities
 import io.github.droidkaigi.confsched2018.data.api.response.mapper.toSessionSpeakerJoinEntities

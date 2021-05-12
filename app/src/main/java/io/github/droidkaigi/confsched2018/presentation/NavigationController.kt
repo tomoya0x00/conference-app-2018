@@ -3,11 +3,11 @@ package io.github.droidkaigi.confsched2018.presentation
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.support.customtabs.CustomTabsIntent
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.net.toUri
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.presentation.common.fragment.Findable
@@ -64,7 +64,7 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
 
     private fun tryLaunchingSpecificApp(url: String, customTabsPackageName: String?): Boolean {
         val appUri = url.toUri().let {
-            if (it.host.contains("facebook")) {
+            if (it.host?.contains("facebook") == true) {
                 (FACEBOOK_SCHEME + url).toUri()
             } else it
         }

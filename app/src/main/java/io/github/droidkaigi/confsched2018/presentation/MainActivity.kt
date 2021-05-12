@@ -1,10 +1,10 @@
 package io.github.droidkaigi.confsched2018.presentation
 
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.databinding.ActivityMainBinding
 import io.github.droidkaigi.confsched2018.di.ViewModelFactory
@@ -18,11 +18,11 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var viewModelFactory: ViewModelFactory
 
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this, viewModelFactory).get(MainViewModel::class.java)
+        ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
     }
 
     private val binding: ActivityMainBinding by lazy {
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
