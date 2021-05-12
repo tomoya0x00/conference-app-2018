@@ -19,7 +19,9 @@ object RxFirestore {
                 if (error != null) {
                     emitter.onError(error)
                 } else {
-                    emitter.onNext(snapshot)
+                    snapshot?.let {
+                        emitter.onNext(it)
+                    }
                 }
             }
             emitter.setCancellable { listener.remove() }
@@ -48,7 +50,9 @@ object RxFirestore {
                 if (error != null) {
                     emitter.tryOnError(error)
                 } else {
-                    emitter.onNext(snapshot)
+                    snapshot?.let {
+                        emitter.onNext(it)
+                    }
                 }
             }
             emitter.setCancellable { listener.remove() }

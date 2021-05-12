@@ -16,8 +16,8 @@ pluginManagement {
                 case "com.google.gms.google-services":
                     useModule("com.google.gms:google-services:${requested.version}")
                     break
-                case 'com.google.gms.oss.licenses.plugin':
-                    useModule("com.google.gms:oss-licenses:${requested.version}")
+                case 'com.google.android.gms.oss-licenses-plugin':
+                    useModule("com.google.android.gms:oss-licenses-plugin:${requested.version}")
                     break
                 case 'com.github.ben-manes.versions':
                     useModule("com.github.ben-manes:gradle-versions-plugin:${requested.version}")

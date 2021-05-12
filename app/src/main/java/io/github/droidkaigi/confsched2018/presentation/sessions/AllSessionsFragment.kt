@@ -12,7 +12,7 @@ import androidx.transition.TransitionInflater
 import androidx.transition.TransitionManager
 import com.google.android.material.snackbar.Snackbar
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import dagger.android.support.DaggerFragment
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.databinding.FragmentAllSessionsBinding
@@ -107,7 +107,7 @@ class AllSessionsFragment
     }
 
     private fun setupRecyclerView() {
-        val groupAdapter = GroupAdapter<ViewHolder>().apply {
+        val groupAdapter = GroupAdapter<GroupieViewHolder>().apply {
             add(sessionsSection)
             setOnItemClickListener({ item, _ ->
                 val sessionItem = item as? SpeechSessionItem ?: return@setOnItemClickListener

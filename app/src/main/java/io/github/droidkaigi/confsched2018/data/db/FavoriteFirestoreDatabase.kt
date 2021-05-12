@@ -28,7 +28,7 @@ class FavoriteFirestoreDatabase : FavoriteDatabase {
         return RxFirebaseAuth.getCurrentUser()
                 .flatMap { favoritesRef(it).document(session.id).getsSnapshot() }
                 .flatMap { document ->
-                    val nowFavorite = document.exists() && (document.data[session.id] == true)
+                    val nowFavorite = document.exists() && (document.data?.get(session.id) == true)
                     val newFavorite = !nowFavorite
 
                     if (document.exists()) {

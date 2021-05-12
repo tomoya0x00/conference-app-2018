@@ -7,7 +7,7 @@ plugins {
     kotlin("kapt") version Versions.kotlin
     id("org.jlleitschuh.gradle.ktlint") version Versions.ktlintGradle
     id("io.fabric") version Versions.fabricGradleTool
-    id("com.google.gms.oss.licenses.plugin") version Versions.ossLicenses
+    id("com.google.android.gms.oss-licenses-plugin") version Versions.ossLicenses
     id("com.github.ben-manes.versions") version Versions.gradleVersions
     id("deploygate") version Versions.deploygate
     id("com.github.triplet.play") version Versions.playPublisher
@@ -121,6 +121,7 @@ dependencies {
     implementation(Depends.AndroidX.core)
 
 //==================== Network ====================
+    implementation(Depends.OkHttp3.client)
     implementation(Depends.OkHttp3.loggingIntercepter)
 
     implementation(Depends.Retrofit.core)
@@ -151,8 +152,6 @@ dependencies {
     implementation(Depends.RxJava2.android)
     implementation(Depends.RxJava2.kotlin)
     implementation(Depends.rxbroadcast)
-
-    kapt(Depends.Binding.compiler)
 
     implementation(Depends.Dagger.core)
     implementation(Depends.Dagger.android)
@@ -194,6 +193,9 @@ dependencies {
 
     implementation(Depends.timber)
 
+    // see: https://github.com/google/guava/blob/master/futures/listenablefuture9999/pom.xml#L14
+    implementation(Depends.guavaListenableFutureOnly)
+
     debugImplementation(Depends.leakcanary)
 
     debugImplementation(Depends.Debot.core)
@@ -209,9 +211,9 @@ dependencies {
 
     testImplementation(Depends.threetenbp)
 
-    androidTestImplementation(Depends.SupportTest.runner)
-    androidTestImplementation(Depends.SupportTest.espresso)
-    androidTestImplementation(Depends.SupportTest.contrib)
+    androidTestImplementation(Depends.AndroidX.runner)
+    androidTestImplementation(Depends.AndroidX.espresso)
+    androidTestImplementation(Depends.AndroidX.contrib)
     androidTestImplementation(Depends.assertk)
 }
 
@@ -220,11 +222,9 @@ repositories {
 }
 
 play {
-    uploadImages = true
-    setTrack("alpha") // 'production' or 'rollout' or 'beta' or 'alpha'
-    untrackOld = true
+    track.set("alpha") // 'production' or 'rollout' or 'beta' or 'alpha'
     // userFraction = 0.1
-    jsonFile = file("publisher-keys.json")
+    serviceAccountCredentials.set(file("publisher-keys.json"))
 }
 
 ktlint {
