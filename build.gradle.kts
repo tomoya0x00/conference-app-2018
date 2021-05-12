@@ -9,7 +9,6 @@ allprojects {
         maven(url="https://plugins.gradle.org/m2/")
         maven(url="https://maven.fabric.io/public")
         maven(url="https://jitpack.io")
-        jcenter()
     }
 }
 
