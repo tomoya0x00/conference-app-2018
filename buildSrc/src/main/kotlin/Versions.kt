@@ -1,7 +1,7 @@
 object Versions {
     const val compileSdk = 30
     const val minSdk = 23
-    const val targetSdk = 27
+    const val targetSdk = 30
     const val gradleBuildTool = "4.2.0"
     const val kotlin = "1.4.30"
     const val googleServices = "4.3.5"
