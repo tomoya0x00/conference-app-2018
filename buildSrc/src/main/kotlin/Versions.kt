@@ -7,7 +7,6 @@ object Versions {
     const val googleServices = "4.3.5"
     const val ktlint = "0.41.0"
     const val ktlintGradle = "10.0.0"
-    const val fabricGradleTool = "1.28.0"
     const val gradleVersions = "0.38.0"
     const val retrofit = "2.9.0"
     const val kotshi = "2.4.0"
