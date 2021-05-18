@@ -6,7 +6,6 @@ plugins {
     kotlin("android") version Versions.kotlin
     kotlin("kapt") version Versions.kotlin
     id("org.jlleitschuh.gradle.ktlint") version Versions.ktlintGradle
-    id("io.fabric") version Versions.fabricGradleTool
     id("com.google.android.gms.oss-licenses-plugin") version Versions.ossLicenses
     id("com.github.ben-manes.versions") version Versions.gradleVersions
     id("deploygate") version Versions.deploygate
@@ -186,10 +185,6 @@ dependencies {
 //==================== Debug ====================
     debugImplementation(Depends.Stetho.core)
     debugImplementation(Depends.Stetho.okhttp3)
-
-    implementation(Depends.crashlytics) {
-        isTransitive = true
-    }
 
     implementation(Depends.timber)
 

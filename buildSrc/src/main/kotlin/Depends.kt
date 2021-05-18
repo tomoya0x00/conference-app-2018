@@ -98,7 +98,6 @@ object Depends {
         const val okhttp3 = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
     }
 
-    const val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.8.0@aar"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.7"
 

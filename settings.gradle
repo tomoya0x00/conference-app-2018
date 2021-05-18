@@ -28,9 +28,6 @@ pluginManagement {
                 case "org.jlleitschuh.gradle":
                     useModule("org.jlleitschuh.gradle:ktlint-gradle:${requested.version}")
                     break
-                case 'io.fabric':
-                    useModule("io.fabric.tools:gradle:${requested.version}")
-                    break
                 case 'deploygate':
                     useModule("com.deploygate:gradle:${requested.version}")
                     break
