@@ -232,18 +232,3 @@ ktlint {
 }
 
 apply(mapOf("plugin" to "com.google.gms.google-services"))
-
-deploygate {
-    userName = "takahirom"
-    token = System.getenv("DEPLOY_GATE_API_KEY")
-
-    apks {
-        create("release") {
-            val hash = Runtime.getRuntime().exec("git rev-parse --short HEAD").inputStream.reader().use { it.readText() }.trim()
-            message = "https://github.com/DroidKaigi/conference-app-2018/tree/$hash ${System.getenv("CIRCLE_BUILD_URL")}"
-
-            distributionKey = "aed2445665e27de6571227992d66ea489b6bdb44"
-            releaseNote = "https://github.com/DroidKaigi/conference-app-2018/tree/$hash ${System.getenv("CIRCLE_BUILD_URL")}"
-        }
-    }
-}
