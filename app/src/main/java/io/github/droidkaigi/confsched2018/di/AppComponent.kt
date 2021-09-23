@@ -6,20 +6,24 @@ import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
 import io.github.droidkaigi.confsched2018.di.activitymodule.MainActivityBuilder
+import io.github.droidkaigi.confsched2018.di.activitymodule.SessionDetailActivityBuilder
 import io.github.droidkaigi.confsched2018.presentation.App
 import io.github.droidkaigi.confsched2018.service.push.PushServiceBuilder
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-    AndroidSupportInjectionModule::class,
-    AppModule::class,
-    NetworkModule::class,
-    DatabaseModule::class,
-    ViewModelModule::class,
-    PushServiceBuilder::class,
-    MainActivityBuilder::class
-])
+@Component(
+    modules = [
+        AndroidSupportInjectionModule::class,
+        AppModule::class,
+        NetworkModule::class,
+        DatabaseModule::class,
+        ViewModelModule::class,
+        PushServiceBuilder::class,
+        MainActivityBuilder::class,
+        SessionDetailActivityBuilder::class
+    ]
+)
 interface AppComponent : AndroidInjector<App> {
     @Component.Builder
     interface Builder {

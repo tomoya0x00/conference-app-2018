@@ -17,6 +17,7 @@ import dagger.android.support.DaggerFragment
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.databinding.FragmentAllSessionsBinding
 import io.github.droidkaigi.confsched2018.model.Session
+import io.github.droidkaigi.confsched2018.presentation.NavigationController
 import io.github.droidkaigi.confsched2018.presentation.Result
 import io.github.droidkaigi.confsched2018.presentation.common.view.OnTabReselectedListener
 import io.github.droidkaigi.confsched2018.presentation.sessions.item.DateSessionsSection
@@ -40,6 +41,7 @@ class AllSessionsFragment
     private val sessionsSection = DateSessionsSection()
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject lateinit var navigationController: NavigationController
     @Inject lateinit var sessionAlarm: SessionAlarm
     @Inject lateinit var sharedRecycledViewPool: RecyclerView.RecycledViewPool
 
@@ -56,8 +58,10 @@ class AllSessionsFragment
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentAllSessionsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -74,8 +78,10 @@ class AllSessionsFragment
             when (result) {
                 is Result.Success -> {
                     val sessions = result.data
-                    sessionsSection.updateSessions(sessions, onFavoriteClickListener,
-                            onFeedbackListener, true)
+                    sessionsSection.updateSessions(
+                        sessions, onFavoriteClickListener,
+                        onFeedbackListener, true
+                    )
                 }
                 is Result.Failure -> {
                     Timber.e(result.e)
@@ -111,7 +117,7 @@ class AllSessionsFragment
             add(sessionsSection)
             setOnItemClickListener({ item, _ ->
                 val sessionItem = item as? SpeechSessionItem ?: return@setOnItemClickListener
-
+                navigationController.navigateToSessionDetailActivity(sessionItem.session)
             })
         }
         binding.sessionsRecycler.apply {
@@ -119,20 +125,22 @@ class AllSessionsFragment
             (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
             addOnScrollListener(
-                    onScrollStateChanged = { _: RecyclerView?, newState: Int ->
-                        if (binding.sessionsRecycler.isGone()) return@addOnScrollListener
-                        setDayHeaderVisibility(newState != RecyclerView.SCROLL_STATE_IDLE)
-                    },
-                    onScrolled = { _, _, _ ->
-                        val linearLayoutManager = layoutManager as LinearLayoutManager
-                        val firstPosition = linearLayoutManager.findFirstVisibleItemPosition()
-                        val dayNumber = sessionsSection.getDateNumberOrNull(firstPosition)
-                        dayNumber ?: return@addOnScrollListener
-                        val dayTitle = getString(R.string.session_day_title, dayNumber)
-                        binding.dayHeader.setTextIfChanged(dayTitle)
-                    })
-            setLinearDivider(R.drawable.shape_divider_vertical_12dp,
-                    layoutManager as LinearLayoutManager)
+                onScrollStateChanged = { _: RecyclerView?, newState: Int ->
+                    if (binding.sessionsRecycler.isGone()) return@addOnScrollListener
+                    setDayHeaderVisibility(newState != RecyclerView.SCROLL_STATE_IDLE)
+                },
+                onScrolled = { _, _, _ ->
+                    val linearLayoutManager = layoutManager as LinearLayoutManager
+                    val firstPosition = linearLayoutManager.findFirstVisibleItemPosition()
+                    val dayNumber = sessionsSection.getDateNumberOrNull(firstPosition)
+                    dayNumber ?: return@addOnScrollListener
+                    val dayTitle = getString(R.string.session_day_title, dayNumber)
+                    binding.dayHeader.setTextIfChanged(dayTitle)
+                })
+            setLinearDivider(
+                R.drawable.shape_divider_vertical_12dp,
+                layoutManager as LinearLayoutManager
+            )
             setRecycledViewPool(sharedRecycledViewPool)
             (layoutManager as LinearLayoutManager).recycleChildrenOnDetach = true
         }
@@ -140,8 +148,8 @@ class AllSessionsFragment
 
     private fun setDayHeaderVisibility(visibleDayHeader: Boolean) {
         val transition = TransitionInflater
-                .from(context)
-                .inflateTransition(R.transition.date_header_visibility)
+            .from(context)
+            .inflateTransition(R.transition.date_header_visibility)
         TransitionManager.beginDelayedTransition(binding.sessionsConstraintLayout, transition)
         binding.dayHeader.setVisible(visibleDayHeader)
     }

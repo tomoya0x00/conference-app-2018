@@ -10,7 +10,9 @@ import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import io.github.droidkaigi.confsched2018.R
+import io.github.droidkaigi.confsched2018.model.Session
 import io.github.droidkaigi.confsched2018.presentation.common.fragment.Findable
+import io.github.droidkaigi.confsched2018.presentation.detail.SessionDetailActivity
 import io.github.droidkaigi.confsched2018.presentation.sessions.AllSessionsFragment
 import io.github.droidkaigi.confsched2018.util.CustomTabsHelper
 import javax.inject.Inject
@@ -39,6 +41,10 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
         MainActivity.start(activity)
     }
 
+    fun navigateToSessionDetailActivity(session: Session) {
+        SessionDetailActivity.start(activity, session)
+    }
+
     fun navigateToExternalBrowser(url: String) {
         val customTabsPackageName = CustomTabsHelper.getPackageNameToUse(activity)
         if (tryLaunchingSpecificApp(url, customTabsPackageName)) {
@@ -46,13 +52,13 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
         }
 
         val customTabsIntent = CustomTabsIntent.Builder()
-                .setShowTitle(true)
-                .setToolbarColor(ContextCompat.getColor(activity, R.color.primary))
-                .build()
-                .apply {
-                    val referrer = "android-app://${activity.packageName}".toUri()
-                    intent.putExtra(Intent.EXTRA_REFERRER, referrer)
-                }
+            .setShowTitle(true)
+            .setToolbarColor(ContextCompat.getColor(activity, R.color.primary))
+            .build()
+            .apply {
+                val referrer = "android-app://${activity.packageName}".toUri()
+                intent.putExtra(Intent.EXTRA_REFERRER, referrer)
+            }
         val webUri = url.toUri()
         if (tryUsingCustomTabs(customTabsPackageName, customTabsIntent, webUri)) {
             return
@@ -70,8 +76,8 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
         }
         val appIntent = Intent(Intent.ACTION_VIEW, appUri)
         val intentResolveInfo = activity.packageManager.resolveActivity(
-                appIntent,
-                PackageManager.MATCH_DEFAULT_ONLY
+            appIntent,
+            PackageManager.MATCH_DEFAULT_ONLY
         )
 
         intentResolveInfo?.activityInfo?.packageName?.let {
@@ -84,9 +90,11 @@ class NavigationController @Inject constructor(private val activity: AppCompatAc
         return false
     }
 
-    private fun tryUsingCustomTabs(customTabsPackageName: String?,
-                                   customTabsIntent: CustomTabsIntent,
-                                   webUri: Uri): Boolean {
+    private fun tryUsingCustomTabs(
+        customTabsPackageName: String?,
+        customTabsIntent: CustomTabsIntent,
+        webUri: Uri
+    ): Boolean {
         customTabsPackageName?.let {
             customTabsIntent.intent.`package` = customTabsPackageName
             customTabsIntent.launchUrl(activity, webUri)

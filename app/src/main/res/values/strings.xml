@@ -36,6 +36,11 @@
     <string name="session_menu_tab_mode_schedule">Change to Room-based views</string>
     <string name="session_current_badge" translatable="false">NOW!</string>
 
+    <!-- Session detail -->
+    <string name="detail_sessions_next">Next</string>
+    <string name="detail_sessions_content_description_prev">Previous</string>
+    <string name="detail_sessions_content_description_next">Next</string>
+
     <!-- Notification -->
     <string name="notification_title">%1$s will start soon</string>
     <string name="notification_message">%1$s ~ %2$s @ %3$s</string>

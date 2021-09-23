@@ -24,6 +24,11 @@
     <string name="session_finished">終了済みのセッション</string>
     <string name="session_go_to_feedback">アンケートへ</string>
 
+    <!-- Session detail -->
+    <string name="detail_sessions_next">Next</string>
+    <string name="detail_sessions_content_description_prev">前へ</string>
+    <string name="detail_sessions_content_description_next">次へ</string>
+
     <!-- Notification -->
     <string name="notification_title">%1$s がもうすぐ始まります。</string>
     <string name="notification_message">%1$s ~ %2$s @ %3$s</string>
