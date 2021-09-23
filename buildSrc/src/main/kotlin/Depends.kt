@@ -20,14 +20,14 @@ object Depends {
     }
 
     object AndroidX {
-        const val core = "androidx.core:core-ktx:1.5.0-rc02"
-        const val fragment = "androidx.fragment:fragment-ktx:1.3.3"
-        const val activity = "androidx.activity:activity-ktx:1.2.3"
+        const val core = "androidx.core:core-ktx:1.6.0"
+        const val fragment = "androidx.fragment:fragment-ktx:1.3.6"
+        const val activity = "androidx.activity:activity-ktx:1.3.1"
         const val viewModel =  "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val reactivestreams =  "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
         const val browser = "androidx.browser:browser:1.3.0"
-        const val constraint = "androidx.constraintlayout:constraintlayout:2.0.4"
+        const val constraint = "androidx.constraintlayout:constraintlayout:2.1.0"
         const val emoji = "androidx.emoji:emoji-appcompat:1.1.0"
 
         object Room {
@@ -36,12 +36,12 @@ object Depends {
             const val compiler = "androidx.room:room-compiler:${Versions.room}"
         }
 
-        const val runner = "androidx.test:runner:1.3.0"
-        const val espresso = "androidx.test.espresso:espresso-core:3.3.0"
-        const val contrib = "androidx.test.espresso:espresso-contrib:3.3.0"
+        const val runner = "androidx.test:runner:1.4.0"
+        const val espresso = "androidx.test.espresso:espresso-core:3.4.0"
+        const val contrib = "androidx.test.espresso:espresso-contrib:3.4.0"
     }
 
-    const val material = "com.google.android.material:material:1.3.0"
+    const val material = "com.google.android.material:material:1.4.0"
 
     object RxJava2 {
         const val core = "io.reactivex.rxjava2:rxjava:2.2.21"
@@ -60,15 +60,15 @@ object Depends {
     }
 
     object PlayService {
-        const val map = "com.google.android.gms:play-services-maps:16.0.0"
-        const val oss = "com.google.android.gms:play-services-oss-licenses:16.0.1"
+        const val map = "com.google.android.gms:play-services-maps:17.0.1"
+        const val oss = "com.google.android.gms:play-services-oss-licenses:17.0.0"
     }
 
     object Firebase {
-        const val firestore = "com.google.firebase:firebase-firestore:17.1.1"
-        const val auth = "com.google.firebase:firebase-auth:16.0.4"
-        const val core = "com.google.firebase:firebase-core:16.0.4"
-        const val messaging = "com.google.firebase:firebase-messaging:17.3.3"
+        const val firestore = "com.google.firebase:firebase-firestore:23.0.3"
+        const val auth = "com.google.firebase:firebase-auth:21.0.1"
+        const val core = "com.google.firebase:firebase-core:19.0.1"
+        const val messaging = "com.google.firebase:firebase-messaging:22.0.0"
     }
 
     const val threetenabp = "com.jakewharton.threetenabp:threetenabp:1.3.1"
@@ -98,7 +98,7 @@ object Depends {
         const val okhttp3 = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"
     }
 
-    const val timber = "com.jakewharton.timber:timber:4.7.1"
+    const val timber = "com.jakewharton.timber:timber:5.0.1"
     const val leakcanary = "com.squareup.leakcanary:leakcanary-android:2.7"
 
     object Debot {
@@ -114,7 +114,7 @@ object Depends {
         const val multidex = "org.robolectric:shadows-multidex:${Versions.robolectric}"
     }
 
-    const val assertk = "com.willowtreeapps.assertk:assertk:0.24"
+    const val assertk = "com.willowtreeapps.assertk:assertk:0.25"
     const val threetenbp = "org.threeten:threetenbp:1.5.1"
 
     const val guavaListenableFutureOnly =

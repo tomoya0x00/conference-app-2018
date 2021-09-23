@@ -15,10 +15,8 @@ class PushService : FirebaseMessagingService() {
         AndroidInjection.inject(this)
     }
 
-    override fun onMessageReceived(message: RemoteMessage?) {
-        message?.let {
-            Timber.d("from: %s", message.from)
-            classifier.classify(message).process(message)
-        }
+    override fun onMessageReceived(message: RemoteMessage) {
+        Timber.d("from: %s", message.from)
+        classifier.classify(message).process(message)
     }
 }
