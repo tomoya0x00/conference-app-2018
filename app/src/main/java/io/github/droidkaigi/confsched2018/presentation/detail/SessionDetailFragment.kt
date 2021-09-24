@@ -31,7 +31,8 @@ class SessionDetailFragment : DaggerFragment() {
     @Inject lateinit var sessionAlarm: SessionAlarm
 
     private val sessionDetailViewModel: SessionDetailViewModel by lazy {
-        ViewModelProviders.of(activity!!, viewModelFactory).get(SessionDetailViewModel::class.java)
+        ViewModelProviders.of(requireActivity(), viewModelFactory)
+            .get(SessionDetailViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -46,8 +47,8 @@ class SessionDetailFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sessionId = arguments!!.getString(EXTRA_SESSION_ID)
-        sessionDetailViewModel.sessions.observe(this) { result ->
+        val sessionId = requireArguments().getString(EXTRA_SESSION_ID)
+        sessionDetailViewModel.sessions.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Success -> {
                     val sessions = result.data

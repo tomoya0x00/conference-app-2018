@@ -298,12 +298,12 @@
                     android:background="?actionBarItemBackground"
                     android:contentDescription="@string/detail_sessions_content_description_prev"
                     android:scaleType="center"
-                    android:tint="@color/app_bar_text_color"
                     android:visibility="@{prevSession == null ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/detail_sessions_indicator_background"
                     app:layout_constraintStart_toStartOf="@id/detail_sessions_indicator_background"
                     app:layout_constraintTop_toTopOf="@id/detail_sessions_indicator_background"
                     app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+                    app:tint="@color/app_bar_text_color"
                     />
                 <ImageView
                     android:id="@+id/detail_sessions_next_icon"
@@ -311,12 +311,12 @@
                     android:layout_height="48dp"
                     android:contentDescription="@string/detail_sessions_content_description_next"
                     android:scaleType="center"
-                    android:tint="@color/app_bar_text_color"
                     android:visibility="@{nextSession == null ? View.GONE : View.VISIBLE}"
                     app:layout_constraintBottom_toBottomOf="@id/detail_sessions_indicator_background"
                     app:layout_constraintEnd_toEndOf="@id/detail_sessions_indicator_background"
                     app:layout_constraintTop_toTopOf="@id/detail_sessions_indicator_background"
                     app:srcCompat="@drawable/ic_arrow_forward_black_24dp"
+                    app:tint="@color/app_bar_text_color"
                     />
                 <TextView
                     android:id="@+id/detail_sessions_next_label"
