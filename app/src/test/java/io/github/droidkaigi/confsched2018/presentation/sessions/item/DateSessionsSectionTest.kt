@@ -1,6 +1,6 @@
 package io.github.droidkaigi.confsched2018.presentation.sessions.item
 
-import assertk.assert
+import assertk.assertThat
 import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import io.github.droidkaigi.confsched2018.createDummySession
@@ -23,19 +23,19 @@ class DateSessionsSectionTest {
         }
 
         fun assertItemCount(expected: Int) {
-            assert(section.itemCount).isEqualTo(expected)
+            assertThat(section.itemCount).isEqualTo(expected)
         }
 
         fun <T : Any> assertItemInstanceOf(position: Int, expected: Class<T>) {
-            assert(section.getItem(position)).isInstanceOf(expected)
+            assertThat(section.getItem(position)).isInstanceOf(expected)
         }
 
         fun assertDateHeaderPosition(by: Date, expected: Int) {
-            assert(section.getDateHeaderPositionByDate(by)).isEqualTo(expected)
+            assertThat(section.getDateHeaderPositionByDate(by)).isEqualTo(expected)
         }
 
         fun assertDateNumberOrNull(position: Int, expected: Int?) {
-            assert(section.getDateNumberOrNull(position)).isEqualTo(expected)
+            assertThat(section.getDateNumberOrNull(position)).isEqualTo(expected)
         }
     }
 
@@ -73,8 +73,9 @@ class DateSessionsSectionTest {
             sections[2] : SpeechSessionItem()
              */
             section.updateSessions(listOf(
-                    createDummySpecialSession(),
-                    createDummySession()), {}, {})
+                createDummySpecialSession(),
+                createDummySession()
+            ), {}, {})
             assertItemCount(3)
             assertItemInstanceOf(0, DateHeaderItem::class.java)
             assertItemInstanceOf(1, SpecialSessionItem::class.java)
@@ -103,11 +104,11 @@ class DateSessionsSectionTest {
             sections[7] : SpeechSessionItem()
              */
             section.updateSessions(listOf(
-                    createDummySession(startTime = 10000, endTime = 10000),
-                    createDummySession(startTime = 10000, endTime = 10000),
-                    createDummySession(startTime = 20000, endTime = 20000),
-                    createDummySession(startTime = 20000, endTime = 20000),
-                    createDummySession(startTime = 30000, endTime = 30000)
+                createDummySession(startTime = 10000, endTime = 10000),
+                createDummySession(startTime = 10000, endTime = 10000),
+                createDummySession(startTime = 20000, endTime = 20000),
+                createDummySession(startTime = 20000, endTime = 20000),
+                createDummySession(startTime = 30000, endTime = 30000)
             ), {}, {})
 
             assertItemCount(8)
@@ -143,11 +144,11 @@ class DateSessionsSectionTest {
             sections[6] : SpeechSessionItem(dayNumber=2)
              */
             section.updateSessions(listOf(
-                    createDummySession(dayNumber = 1, startTime = 10000, endTime = 10000),
-                    createDummySession(dayNumber = 1, startTime = 10000, endTime = 10000),
-                    createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000),
-                    createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000),
-                    createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000)
+                createDummySession(dayNumber = 1, startTime = 10000, endTime = 10000),
+                createDummySession(dayNumber = 1, startTime = 10000, endTime = 10000),
+                createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000),
+                createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000),
+                createDummySession(dayNumber = 2, startTime = 20000, endTime = 20000)
             ), {}, {})
 
             assertItemCount(7)

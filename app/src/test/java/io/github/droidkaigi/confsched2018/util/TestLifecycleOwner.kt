@@ -1,8 +1,9 @@
 package io.github.droidkaigi.confsched2018.util
 
-import android.arch.lifecycle.Lifecycle
-import android.arch.lifecycle.LifecycleOwner
-import android.arch.lifecycle.LifecycleRegistry
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+
 
 class TestLifecycleOwner : LifecycleOwner {
 

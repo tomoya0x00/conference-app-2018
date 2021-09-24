@@ -1,9 +1,5 @@
 package io.github.droidkaigi.confsched2018.data.repository
 
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
 import io.github.droidkaigi.confsched2018.createDummySessionWithSpeakersEntities
 import io.github.droidkaigi.confsched2018.createDummySpeakerEntities
 import io.github.droidkaigi.confsched2018.data.db.FavoriteDatabase
@@ -15,6 +11,10 @@ import io.reactivex.Flowable
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
 import org.threeten.bp.LocalDate
 
@@ -37,22 +37,26 @@ class SessionsDataRepositoryTest {
 
         whenever(sessionDatabase.getAllSessions()).doReturn(Flowable.just(sessions))
         whenever(sessionDatabase.getAllSpeaker()).doReturn(Flowable.just(speakers))
-        val sessionDataRepository = SessionDataRepository(mock(),
-                sessionDatabase,
-                favoriteDatabase,
-                TestSchedulerProvider())
+        val sessionDataRepository = SessionDataRepository(
+            mock(),
+            sessionDatabase,
+            favoriteDatabase,
+            TestSchedulerProvider()
+        )
 
         sessionDataRepository
-                .sessions
-                .test()
-                .assertValueAt(0,
-                        sessions.map {
-                            it.toSession(speakers,
-                                    listOf(),
-                                    LocalDate.of(1, 1, 1))
-                        }
-                                + SpecialSessions.getSessions()
-                )
+            .sessions
+            .test()
+            .assertValueAt(0,
+                sessions.map {
+                    it.toSession(
+                        speakers,
+                        listOf(),
+                        LocalDate.of(1, 1, 1)
+                    )
+                }
+                        + SpecialSessions.getSessions()
+            )
 
         verify(sessionDatabase).getAllSessions()
     }

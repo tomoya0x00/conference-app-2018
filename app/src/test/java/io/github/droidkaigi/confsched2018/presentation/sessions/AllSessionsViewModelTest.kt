@@ -1,11 +1,7 @@
 package io.github.droidkaigi.confsched2018.presentation.sessions
 
-import android.arch.lifecycle.Observer
-import com.nhaarman.mockito_kotlin.any
-import com.nhaarman.mockito_kotlin.doReturn
-import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.verify
-import com.nhaarman.mockito_kotlin.whenever
+import android.os.Looper.getMainLooper
+import androidx.lifecycle.Observer
 import io.github.droidkaigi.confsched2018.data.repository.SessionRepository
 import io.github.droidkaigi.confsched2018.model.Session
 import io.github.droidkaigi.confsched2018.presentation.Result
@@ -17,7 +13,13 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
+import org.mockito.kotlin.any
+import org.mockito.kotlin.doReturn
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
 
 @RunWith(RobolectricTestRunner::class)
 class AllSessionsViewModelTest {
@@ -36,6 +38,8 @@ class AllSessionsViewModelTest {
 
         viewModel.sessions.observeForever(result)
 
+        shadowOf(getMainLooper()).idle()
+
         verify(repository).sessions
         verify(result).onChanged(Result.inProgress())
     }
@@ -48,6 +52,8 @@ class AllSessionsViewModelTest {
 
         viewModel.sessions.observeForever(result)
 
+        shadowOf(getMainLooper()).idle()
+
         verify(repository).sessions
         verify(result).onChanged(Result.success(sessions))
     }
@@ -59,6 +65,8 @@ class AllSessionsViewModelTest {
         val result: Observer<Result<List<Session>>> = mock()
 
         viewModel.sessions.observeForever(result)
+
+        shadowOf(getMainLooper()).idle()
 
         verify(repository).sessions
         verify(result).onChanged(Result.failure(runtimeException.message!!, runtimeException))
