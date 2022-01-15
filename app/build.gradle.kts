@@ -162,7 +162,7 @@ dependencies {
 
     implementation(Depends.Firebase.firestore)
     implementation(Depends.Firebase.auth)
-    implementation(Depends.Firebase.core)
+    implementation(Depends.Firebase.analytics)
     implementation(Depends.Firebase.messaging)
 
     implementation(Depends.threetenabp)
