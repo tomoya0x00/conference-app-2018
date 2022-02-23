@@ -18,7 +18,7 @@ val versionMinor = 0
 val versionPatch = 0
 
 android {
-    compileSdkVersion(Versions.compileSdk)
+    compileSdk = Versions.compileSdk
 
     buildFeatures {
         dataBinding = true
@@ -26,14 +26,14 @@ android {
 
     defaultConfig {
         applicationId = "io.github.droidkaigi.confsched2018"
-        minSdkVersion(Versions.minSdk)
-        targetSdkVersion(Versions.targetSdk)
+        minSdk = Versions.minSdk
+        targetSdk = Versions.targetSdk
         versionCode = versionMajor * 10000 + versionMinor * 100 + versionPatch
         versionName = "$versionMajor.$versionMinor.$versionPatch"
         testInstrumentationRunner = "io.github.droidkaigi.confsched2018.test.TestAppRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
-        resConfigs("en", "ja")
+        resourceConfigurations.addAll(listOf("en", "ja"))
 
         javaCompileOptions {
             annotationProcessorOptions {
@@ -75,7 +75,6 @@ android {
             resValue("string", "app_name", "DroidKaigi 2018")
             signingConfig = signingConfigs.getByName("release")
             isDebuggable = false
-            isZipAlignEnabled = true
             isMinifyEnabled = true
             proguardFile(getDefaultProguardFile("proguard-android.txt"))
             // global proguard settings
@@ -92,11 +91,11 @@ android {
         unitTests.isReturnDefaultValues = true
         unitTests.isIncludeAndroidResources = true
     }
-    lintOptions {
+    lint {
         lintConfig = file("lint.xml")
         textReport = true
-        textOutput("stdout")
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
