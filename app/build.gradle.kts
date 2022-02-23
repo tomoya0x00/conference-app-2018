@@ -131,7 +131,7 @@ dependencies {
 
     implementation(Depends.AndroidX.fragment)
     implementation(Depends.AndroidX.activity)
-    implementation(Depends.AndroidX.lifecycle)
+    implementation(Depends.AndroidX.livedata)
     implementation(Depends.AndroidX.viewModel)
     implementation(Depends.AndroidX.reactivestreams)
     implementation(Depends.AndroidX.browser)
