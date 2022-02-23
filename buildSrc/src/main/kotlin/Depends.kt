@@ -1,6 +1,8 @@
 object Depends {
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0" // added
+        const val coroutinesRx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.0" // added
     }
 
     object OkHttp3 {

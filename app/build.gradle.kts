@@ -9,7 +9,6 @@ plugins {
     id("com.google.android.gms.oss-licenses-plugin") version Versions.ossLicenses
     id("com.github.ben-manes.versions") version Versions.gradleVersions
     id("deploygate") version Versions.deploygate
-    id("com.github.triplet.play") version Versions.playPublisher
     id("com.google.gms.google-services") version Versions.googleServices apply false
 }
 
@@ -117,6 +116,8 @@ dependencies {
 
     // Kotlin
     implementation(Depends.Kotlin.stdlib)
+    implementation(Depends.Kotlin.coroutines) // added
+    implementation(Depends.Kotlin.coroutinesRx2) // added
     implementation(Depends.AndroidX.core)
 
 //==================== Network ====================
@@ -214,12 +215,6 @@ dependencies {
 
 repositories {
     mavenCentral()
-}
-
-play {
-    track.set("alpha") // 'production' or 'rollout' or 'beta' or 'alpha'
-    // userFraction = 0.1
-    serviceAccountCredentials.set(file("publisher-keys.json"))
 }
 
 ktlint {

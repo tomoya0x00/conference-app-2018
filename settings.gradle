@@ -22,9 +22,6 @@ pluginManagement {
                 case 'com.github.ben-manes.versions':
                     useModule("com.github.ben-manes:gradle-versions-plugin:${requested.version}")
                     break
-                case 'com.github.triplet.play':
-                    useModule("com.github.triplet.gradle:play-publisher:${requested.version}")
-                    break
                 case "org.jlleitschuh.gradle":
                     useModule("org.jlleitschuh.gradle:ktlint-gradle:${requested.version}")
                     break
