@@ -10,10 +10,16 @@ import io.github.droidkaigi.confsched2018.data.db.fixeddata.SpecialSessions
 import io.github.droidkaigi.confsched2018.model.Session
 import io.github.droidkaigi.confsched2018.util.ext.atJST
 import io.github.droidkaigi.confsched2018.util.rx.SchedulerProvider
-import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Single
 import io.reactivex.rxkotlin.Flowables
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.rx2.await
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +30,10 @@ class SessionDataRepository @Inject constructor(
     private val schedulerProvider: SchedulerProvider
 ) : SessionRepository {
 
-    override val sessions: Flowable<List<Session>> =
+    // Injecting by Dagger is preferable
+    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
+    override val sessions: StateFlow<List<Session>> =
         Flowables.combineLatest(
             sessionDatabase.getAllSessions()
                 .filter { it.isNotEmpty() }
@@ -52,22 +61,28 @@ class SessionDataRepository @Inject constructor(
             .doOnNext {
                 if (DEBUG) Timber.d("size:${it.size} current:${System.currentTimeMillis()}")
             }
+            .asFlow()
+            .stateIn(
+                scope = scope,
+                started = SharingStarted.Lazily,
+                initialValue = emptyList(),
+            )
 
     @VisibleForTesting
     val specialSessions: List<Session.SpecialSession> by lazy {
         SpecialSessions.getSessions()
     }
 
-    @CheckResult override fun favorite(session: Session.SpeechSession): Single<Boolean> =
-        favoriteDatabase.favorite(session)
+    @CheckResult override suspend fun favorite(session: Session.SpeechSession): Boolean =
+        favoriteDatabase.favorite(session).await()
 
-    @CheckResult override fun refreshSessions(): Completable {
-        return api.getSessions()
+    @CheckResult override suspend fun refreshSessions() {
+        api.getSessions()
             .doOnSuccess { response ->
                 sessionDatabase.save(response)
             }
             .subscribeOn(schedulerProvider.io())
-            .toCompletable()
+            .await()
     }
 
     companion object {

@@ -5,10 +5,11 @@ import io.github.droidkaigi.confsched2018.model.Session
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
+import kotlinx.coroutines.flow.StateFlow
 
 interface SessionRepository {
-    val sessions: Flowable<List<Session>>
+    val sessions: StateFlow<List<Session>>
 
-    @CheckResult fun refreshSessions(): Completable
-    @CheckResult fun favorite(session: Session.SpeechSession): Single<Boolean>
+    @CheckResult suspend fun refreshSessions()
+    @CheckResult suspend fun favorite(session: Session.SpeechSession): Boolean
 }

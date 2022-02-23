@@ -1,41 +1,13 @@
 package io.github.droidkaigi.confsched2018.presentation.common.mapper
 
-import androidx.annotation.CheckResult
 import io.github.droidkaigi.confsched2018.presentation.Result
-import io.github.droidkaigi.confsched2018.util.rx.SchedulerProvider
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 
-@CheckResult fun <T> Flowable<T>.toResult(schedulerProvider: SchedulerProvider):
-    Flowable<Result<T>> {
-    return compose { item ->
-        item
-            .map { Result.success(it) }
-            .onErrorReturn { e -> Result.failure(e.message ?: "unknown", e) }
-            .observeOn(schedulerProvider.ui())
-            .startWith(Result.inProgress())
-    }
-}
-
-@CheckResult fun <T> Observable<T>.toResult(schedulerProvider: SchedulerProvider):
-    Observable<Result<T>> {
-    return compose { item ->
-        item
-            .map { Result.success(it) }
-            .onErrorReturn { e -> Result.failure(e.message ?: "unknown", e) }
-            .observeOn(schedulerProvider.ui())
-            .startWith(Result.inProgress())
-    }
-}
-
-@CheckResult fun <T> Single<T>.toResult(schedulerProvider: SchedulerProvider):
-    Observable<Result<T>> {
-    return toObservable().toResult(schedulerProvider)
-}
-
-@CheckResult fun <T> Completable.toResult(schedulerProvider: SchedulerProvider):
-    Observable<Result<T>> {
-    return toObservable<T>().toResult(schedulerProvider)
+fun <T> Flow<T>.toResult(): Flow<Result<T>> {
+    return this.map { Result.success(it) }
+        .catch { e -> emit(Result.failure(e.message ?: "unknown", e)) }
+        .onStart { emit(Result.inProgress()) }
 }
