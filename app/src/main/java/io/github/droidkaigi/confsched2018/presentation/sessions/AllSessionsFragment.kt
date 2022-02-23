@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -26,10 +29,10 @@ import io.github.droidkaigi.confsched2018.util.ProgressTimeLatch
 import io.github.droidkaigi.confsched2018.util.SessionAlarm
 import io.github.droidkaigi.confsched2018.util.ext.addOnScrollListener
 import io.github.droidkaigi.confsched2018.util.ext.isGone
-import io.github.droidkaigi.confsched2018.util.ext.observe
 import io.github.droidkaigi.confsched2018.util.ext.setLinearDivider
 import io.github.droidkaigi.confsched2018.util.ext.setTextIfChanged
 import io.github.droidkaigi.confsched2018.util.ext.setVisible
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -74,37 +77,51 @@ class AllSessionsFragment
         val progressTimeLatch = ProgressTimeLatch {
             binding.progress.visibility = if (it) View.VISIBLE else View.GONE
         }
-        allSessionsViewModel.sessions.observe(this, { result ->
-            when (result) {
-                is Result.Success -> {
-                    val sessions = result.data
-                    sessionsSection.updateSessions(
-                        sessions, onFavoriteClickListener,
-                        onFeedbackListener, true
-                    )
-                }
-                is Result.Failure -> {
-                    Timber.e(result.e)
-                }
-            }
-        })
-        allSessionsViewModel.isLoading.observe(this, { isLoading ->
-            progressTimeLatch.loading = isLoading ?: false
-        })
-        allSessionsViewModel.refreshResult.observe(this, { result ->
-            when (result) {
-                is Result.Failure -> {
-                    // If user is offline, not error. So we write log to debug
-                    Timber.d(result.e)
-                    val view = view ?: return@observe
-                    Snackbar.make(view, R.string.session_fetch_failed, Snackbar.LENGTH_LONG).apply {
-                        setAction(R.string.session_load_retry) {
-                            allSessionsViewModel.onRetrySessions()
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                allSessionsViewModel.sessions.collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            val sessions = result.data
+                            sessionsSection.updateSessions(
+                                sessions, onFavoriteClickListener,
+                                onFeedbackListener, true
+                            )
                         }
-                    }.show()
+                        is Result.Failure -> {
+                            Timber.e(result.e)
+                        }
+                        else -> Unit
+                    }
                 }
             }
-        })
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                allSessionsViewModel.isLoading.collect { isLoading ->
+                    progressTimeLatch.loading = isLoading
+                }
+            }
+        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                allSessionsViewModel.refreshResult.collect { result ->
+                    when (result) {
+                        is Result.Failure -> {
+                            // If user is offline, not error. So we write log to debug
+                            Timber.d(result.e)
+                            val view = view ?: return@collect
+                            Snackbar.make(view, R.string.session_fetch_failed, Snackbar.LENGTH_LONG).apply {
+                                setAction(R.string.session_load_retry) {
+                                    allSessionsViewModel.onRetrySessions()
+                                }
+                            }.show()
+                        }
+                        else -> Unit
+                    }
+                }
+            }
+        }
         lifecycle.addObserver(allSessionsViewModel)
     }
 

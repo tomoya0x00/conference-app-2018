@@ -2,22 +2,28 @@ package io.github.droidkaigi.confsched2018.presentation.sessions
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import io.github.droidkaigi.confsched2018.data.repository.SessionRepository
 import io.github.droidkaigi.confsched2018.model.Session
 import io.github.droidkaigi.confsched2018.presentation.Result
 import io.github.droidkaigi.confsched2018.presentation.common.mapper.toResult
 import io.github.droidkaigi.confsched2018.util.defaultErrorHandler
-import io.github.droidkaigi.confsched2018.util.ext.map
-import io.github.droidkaigi.confsched2018.util.ext.toLiveData
 import io.github.droidkaigi.confsched2018.util.rx.SchedulerProvider
 import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.reactive.asFlow
+import kotlinx.coroutines.rx2.awaitFirst
 import javax.inject.Inject
 
 class AllSessionsViewModel @Inject constructor(
@@ -25,17 +31,28 @@ class AllSessionsViewModel @Inject constructor(
     private val schedulerProvider: SchedulerProvider
 ) : ViewModel(), LifecycleObserver {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val mutableRefreshState: MutableLiveData<Result<Unit>> = MutableLiveData()
-    val refreshResult: LiveData<Result<Unit>> = mutableRefreshState
+    private val mutableRefreshState: MutableSharedFlow<Result<Unit>> = MutableSharedFlow()
+    val refreshResult: SharedFlow<Result<Unit>> = mutableRefreshState
 
-    val sessions: LiveData<Result<List<Session>>> by lazy {
+    val sessions: StateFlow<Result<List<Session>>> by lazy {
         repository.sessions
             .toResult(schedulerProvider)
-            .toLiveData()
+            .asFlow()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(),
+                initialValue = Result.success(emptyList())
+            )
     }
 
-    val isLoading: LiveData<Boolean> by lazy {
-        sessions.map { it.inProgress }
+    val isLoading: StateFlow<Boolean> by lazy {
+        sessions.map {
+            it.inProgress
+        }.stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = false
+        )
     }
 
     fun onFavoriteClick(session: Session.SpeechSession) {
@@ -51,14 +68,16 @@ class AllSessionsViewModel @Inject constructor(
     }
 
     private fun refreshSessions() {
-        repository
-            .refreshSessions()
-            .toResult<Unit>(schedulerProvider)
-            .subscribeBy(
-                onNext = { mutableRefreshState.postValue(it) },
-                onError = defaultErrorHandler()
-            )
-            .addTo(compositeDisposable)
+        viewModelScope.launch {
+            runCatching {
+                repository
+                    .refreshSessions()
+                    .toResult<Unit>(schedulerProvider)
+                    .awaitFirst()
+            }.onSuccess { result ->
+                mutableRefreshState.tryEmit(result)
+            }.onFailure(defaultErrorHandler())
+        }
     }
 
     fun onRetrySessions() {
