@@ -133,6 +133,7 @@ dependencies {
     implementation(Depends.AndroidX.activity)
     implementation(Depends.AndroidX.livedata)
     implementation(Depends.AndroidX.viewModel)
+    implementation(Depends.AndroidX.lifecycle) // added
     implementation(Depends.AndroidX.reactivestreams)
     implementation(Depends.AndroidX.browser)
     implementation(Depends.AndroidX.constraint)

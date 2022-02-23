@@ -27,6 +27,7 @@ object Depends {
         const val activity = "androidx.activity:activity-ktx:1.4.0"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}" // added
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
         const val browser = "androidx.browser:browser:1.4.0"
         const val constraint = "androidx.constraintlayout:constraintlayout:2.1.2"

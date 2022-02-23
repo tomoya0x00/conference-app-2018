@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.appbar.AppBarLayout
 import dagger.android.support.DaggerFragment
 import io.github.droidkaigi.confsched2018.R
@@ -20,6 +23,7 @@ import io.github.droidkaigi.confsched2018.util.SessionAlarm
 import io.github.droidkaigi.confsched2018.util.ext.context
 import io.github.droidkaigi.confsched2018.util.ext.drawable
 import io.github.droidkaigi.confsched2018.util.lang
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -48,19 +52,24 @@ class SessionDetailFragment : DaggerFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sessionId = requireArguments().getString(EXTRA_SESSION_ID)
-        sessionDetailViewModel.sessions.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Success -> {
-                    val sessions = result.data
-                    val position = sessions.indexOfFirst { it.id == sessionId }
-                    bindSession(sessions[position])
-                    setSessionIndicator(
-                        sessions.getOrNull(position - 1),
-                        sessions.getOrNull(position + 1)
-                    )
-                }
-                is Result.Failure -> {
-                    Timber.e(result.e)
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sessionDetailViewModel.sessions.collect { result ->
+                    when (result) {
+                        is Result.Success -> {
+                            val sessions = result.data
+                            val position = sessions.indexOfFirst { it.id == sessionId }
+                            bindSession(sessions[position])
+                            setSessionIndicator(
+                                sessions.getOrNull(position - 1),
+                                sessions.getOrNull(position + 1)
+                            )
+                        }
+                        is Result.Failure -> {
+                            Timber.e(result.e)
+                        }
+                        else -> Unit
+                    }
                 }
             }
         }

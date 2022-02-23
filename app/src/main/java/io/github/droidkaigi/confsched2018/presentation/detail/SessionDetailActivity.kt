@@ -7,8 +7,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import io.github.droidkaigi.confsched2018.R
 import io.github.droidkaigi.confsched2018.databinding.ActivitySessionDetailBinding
 import io.github.droidkaigi.confsched2018.model.Session
@@ -16,6 +19,7 @@ import io.github.droidkaigi.confsched2018.presentation.NavigationController
 import io.github.droidkaigi.confsched2018.presentation.Result
 import io.github.droidkaigi.confsched2018.presentation.common.activity.BaseActivity
 import io.github.droidkaigi.confsched2018.presentation.common.menu.DrawerMenu
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -46,14 +50,20 @@ class SessionDetailActivity :
             it.setDisplayHomeAsUpEnabled(true)
             it.setDisplayShowTitleEnabled(false)
         }
-        sessionDetailViewModel.sessions.observe(this) { result ->
-            when (result) {
-                is Result.Success -> {
-                    val sessions = result.data
-                    bindSessions(sessions)
-                }
-                is Result.Failure -> {
-                    Timber.e(result.e)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                sessionDetailViewModel.sessions.collect {
+                    result ->
+                    when (result) {
+                        is Result.Success -> {
+                            val sessions = result.data
+                            bindSessions(sessions)
+                        }
+                        is Result.Failure -> {
+                            Timber.e(result.e)
+                        }
+                        else -> Unit
+                    }
                 }
             }
         }
