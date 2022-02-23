@@ -20,12 +20,12 @@ import io.github.droidkaigi.confsched2018.presentation.sessions.AllSessionsViewM
     @Binds @IntoMap
     @ViewModelKey(AllSessionsViewModel::class)
     fun bindAllSessionsViewModel(
-            allSessionsViewModel: AllSessionsViewModel
+        allSessionsViewModel: AllSessionsViewModel
     ): ViewModel
 
     @Binds @IntoMap
     @ViewModelKey(MainViewModel::class)
     fun bindMainViewModel(
-            mainViewModel: MainViewModel
+        mainViewModel: MainViewModel
     ): ViewModel
 }

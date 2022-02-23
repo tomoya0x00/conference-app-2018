@@ -29,9 +29,9 @@ class SessionAlarm @Inject constructor(val context: Context) {
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        time,
-                        createAlarmIntent(context, session)
+                    AlarmManager.RTC_WAKEUP,
+                    time,
+                    createAlarmIntent(context, session)
                 )
             } else {
                 alarmManager.set(AlarmManager.RTC_WAKEUP, time, createAlarmIntent(context, session))
@@ -49,19 +49,19 @@ class SessionAlarm @Inject constructor(val context: Context) {
         val displaySTime = session.startTime.toReadableDateTimeString()
         val displayETime = session.endTime.toReadableDateTimeString()
         val text = context.getString(R.string.notification_message,
-                displaySTime,
-                displayETime,
-                session.room.name)
+            displaySTime,
+            displayETime,
+            session.room.name)
         val notificationContent = NotificationContent.FavoriteSessionStart(title, text, session.id)
         val intent = NotificationBroadcastReceiver.createIntent(
-                context,
-                notificationContent
+            context,
+            notificationContent
         )
         return PendingIntent.getBroadcast(
-                context,
-                session.id.hashCode(),
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT
+            context,
+            session.id.hashCode(),
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
     }
 

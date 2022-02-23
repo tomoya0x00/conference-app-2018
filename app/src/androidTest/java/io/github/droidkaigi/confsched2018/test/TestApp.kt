@@ -10,9 +10,9 @@ import io.github.droidkaigi.confsched2018.test.di.StubNetworkModule
 class TestApp : App() {
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder()
-                .application(this)
-                .networkModule(StubNetworkModule())
-                .databaseModule(StubDatabaseModule())
-                .build()
+            .application(this)
+            .networkModule(StubNetworkModule())
+            .databaseModule(StubDatabaseModule())
+            .build()
     }
 }

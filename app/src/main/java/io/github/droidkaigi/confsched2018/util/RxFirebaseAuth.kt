@@ -16,10 +16,10 @@ object RxFirebaseAuth {
             return@defer Single.just(currentUser)
         }
         auth.signInAnonymously()
-                .toSingle()
-                .map { it.user }
-                .doOnSuccess { if (DEBUG) Timber.d("Firestore:Sign in Anonymously") }
-                .doOnError { if (DEBUG) Timber.d("Firestore:Sign in error") }
+            .toSingle()
+            .map { it.user }
+            .doOnSuccess { if (DEBUG) Timber.d("Firestore:Sign in Anonymously") }
+            .doOnError { if (DEBUG) Timber.d("Firestore:Sign in error") }
     }
 
     private const val DEBUG: Boolean = false

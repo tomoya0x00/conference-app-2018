@@ -22,22 +22,22 @@ import javax.inject.Singleton
 
     @Singleton @Provides
     fun provideSessionDatabase(
-            appDatabase: AppDatabase,
-            sessionDbDao: SessionDao,
-            speakerDao: SpeakerDao,
-            sessionSpeakerJoinDao: SessionSpeakerJoinDao
+        appDatabase: AppDatabase,
+        sessionDbDao: SessionDao,
+        speakerDao: SpeakerDao,
+        sessionSpeakerJoinDao: SessionSpeakerJoinDao
     ): SessionDatabase =
-            SessionRoomDatabase(appDatabase, sessionDbDao, speakerDao, sessionSpeakerJoinDao)
+        SessionRoomDatabase(appDatabase, sessionDbDao, speakerDao, sessionSpeakerJoinDao)
 
     @Singleton @Provides
     fun provideFavoriteDatabase(): FavoriteDatabase =
-            FavoriteFirestoreDatabase()
+        FavoriteFirestoreDatabase()
 
     @Singleton @Provides
     open fun provideDb(app: Application): AppDatabase =
-            Room.databaseBuilder(app, AppDatabase::class.java, "droidkaigi.db")
-                    .fallbackToDestructiveMigration()
-                    .build()
+        Room.databaseBuilder(app, AppDatabase::class.java, "droidkaigi.db")
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Singleton @Provides
     fun provideSessionsDao(db: AppDatabase): SessionDao = db.sessionDao()
@@ -47,5 +47,5 @@ import javax.inject.Singleton
 
     @Singleton @Provides
     fun provideSessionSpeakerJoinDao(db: AppDatabase): SessionSpeakerJoinDao =
-            db.sessionSpeakerDao()
+        db.sessionSpeakerDao()
 }

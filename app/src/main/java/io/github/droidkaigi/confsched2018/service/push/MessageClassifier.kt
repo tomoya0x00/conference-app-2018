@@ -8,8 +8,8 @@ import io.github.droidkaigi.confsched2018.service.push.processor.NewPostProcesso
 import javax.inject.Inject
 
 class MessageClassifier @Inject constructor(
-        private val postProcessor: Lazy<NewPostProcessor>,
-        private val defaultProcessor: Lazy<DefaultProcessor>) {
+    private val postProcessor: Lazy<NewPostProcessor>,
+    private val defaultProcessor: Lazy<DefaultProcessor>) {
     fun classify(remoteMessage: RemoteMessage): MessageProcessor {
         return when (remoteMessage.from) {
             NewPostProcessor.FCM_FROM -> {

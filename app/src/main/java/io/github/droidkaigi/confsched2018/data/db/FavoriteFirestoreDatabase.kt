@@ -26,34 +26,34 @@ class FavoriteFirestoreDatabase : FavoriteDatabase {
             return Single.error(NotPreparedException())
         }
         return RxFirebaseAuth.getCurrentUser()
-                .flatMap { favoritesRef(it).document(session.id).getsSnapshot() }
-                .flatMap { document ->
-                    val nowFavorite = document.exists() && (document.data?.get(session.id) == true)
-                    val newFavorite = !nowFavorite
+            .flatMap { favoritesRef(it).document(session.id).getsSnapshot() }
+            .flatMap { document ->
+                val nowFavorite = document.exists() && (document.data?.get(session.id) == true)
+                val newFavorite = !nowFavorite
 
-                    if (document.exists()) {
-                        document.reference
-                                .deletes()
-                                .toSingle { newFavorite }
-                    } else {
-                        document.reference
-                                .sets(mapOf("favorite" to newFavorite))
-                                .toSingle { newFavorite }
-                    }
+                if (document.exists()) {
+                    document.reference
+                        .deletes()
+                        .toSingle { newFavorite }
+                } else {
+                    document.reference
+                        .sets(mapOf("favorite" to newFavorite))
+                        .toSingle { newFavorite }
                 }
+            }
     }
 
     @get:CheckResult
     override val favorites: Flowable<List<Int>> = RxFirebaseAuth.getCurrentUser()
-            .flatMap { user: FirebaseUser ->
-                return@flatMap setupFavoritesDocument(user)
-            }
-            .flatMapObservable { user: FirebaseUser ->
-                return@flatMapObservable getFavorites(user)
-            }
-            .doOnNext { isInitialized = true }
-            .toFlowable(BackpressureStrategy.DROP)
-            .cache()
+        .flatMap { user: FirebaseUser ->
+            return@flatMap setupFavoritesDocument(user)
+        }
+        .flatMapObservable { user: FirebaseUser ->
+            return@flatMapObservable getFavorites(user)
+        }
+        .doOnNext { isInitialized = true }
+        .toFlowable(BackpressureStrategy.DROP)
+        .cache()
 
     @CheckResult
     private fun setupFavoritesDocument(currentUser: FirebaseUser): Single<FirebaseUser> {
@@ -61,8 +61,8 @@ class FavoriteFirestoreDatabase : FavoriteDatabase {
         return favorites.isEmpty().flatMap { isEmpty ->
             if (isEmpty) {
                 favorites.adds(mapOf("initialized" to true))
-                        .onErrorComplete()
-                        .toSingle { currentUser }
+                    .onErrorComplete()
+                    .toSingle { currentUser }
             } else {
                 Single.just(currentUser)
             }
@@ -71,9 +71,9 @@ class FavoriteFirestoreDatabase : FavoriteDatabase {
 
     @CheckResult private fun getFavorites(currentUser: FirebaseUser): Observable<List<Int>> {
         return favoritesRef(currentUser)
-                .whereEqualTo("favorite", true)
-                .observesSnapshot()
-                .map { it.documents.mapNotNull { doc -> doc.id.toIntOrNull() } }
+            .whereEqualTo("favorite", true)
+            .observesSnapshot()
+            .map { it.documents.mapNotNull { doc -> doc.id.toIntOrNull() } }
     }
 
     private fun favoritesRef(currentUser: FirebaseUser): CollectionReference {

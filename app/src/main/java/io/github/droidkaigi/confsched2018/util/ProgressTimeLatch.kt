@@ -21,9 +21,9 @@ import android.os.Looper
 import android.os.SystemClock
 
 class ProgressTimeLatch(
-        private val delayMs: Long = 500,
-        private val minShowTime: Long = 500,
-        private val viewRefreshingToggle: ((Boolean) -> Unit)
+    private val delayMs: Long = 500,
+    private val minShowTime: Long = 500,
+    private val viewRefreshingToggle: ((Boolean) -> Unit)
 ) {
     private val handler = Handler(Looper.getMainLooper())
     private var showTime = 0L

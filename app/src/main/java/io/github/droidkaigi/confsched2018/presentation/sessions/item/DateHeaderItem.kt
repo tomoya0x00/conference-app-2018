@@ -8,27 +8,27 @@ import io.github.droidkaigi.confsched2018.util.ext.toReadableTimeString
 import java.util.Date
 
 data class DateHeaderItem(
-        val startDateTime: Date,
-        val endDateTime: Date
+    val startDateTime: Date,
+    val endDateTime: Date
 ) : BindableItem<ItemDateHeaderBinding>(
-        startDateTime.hashCode().toLong()
+    startDateTime.hashCode().toLong()
 ) {
     private val startDateTimePair: ReadableDateTimePair =
-            ReadableDateTimePair(
-                    startDateTime.toReadableDateString(),
-                    startDateTime.toReadableTimeString()
-            )
+        ReadableDateTimePair(
+            startDateTime.toReadableDateString(),
+            startDateTime.toReadableTimeString()
+        )
     private val endDateTimePair: ReadableDateTimePair =
-            ReadableDateTimePair(
-                    endDateTime.toReadableDateString(),
-                    endDateTime.toReadableTimeString()
-            )
+        ReadableDateTimePair(
+            endDateTime.toReadableDateString(),
+            endDateTime.toReadableTimeString()
+        )
 
     override fun bind(viewBinding: ItemDateHeaderBinding, position: Int) {
         viewBinding.periodText.text = viewBinding.root.context.getString(
-                R.string.time_period,
-                startDateTimePair.time,
-                endDateTimePair.time
+            R.string.time_period,
+            startDateTimePair.time,
+            endDateTimePair.time
         )
     }
 
@@ -36,8 +36,8 @@ data class DateHeaderItem(
 }
 
 data class ReadableDateTimePair(
-        val date: String,
-        val time: String
+    val date: String,
+    val time: String
 ) : Comparable<ReadableDateTimePair> {
     override fun compareTo(other: ReadableDateTimePair): Int {
         if (date > other.date) return 1

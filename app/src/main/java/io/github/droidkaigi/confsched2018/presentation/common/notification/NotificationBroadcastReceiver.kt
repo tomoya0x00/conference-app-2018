@@ -21,8 +21,8 @@ class NotificationBroadcastReceiver : BroadcastReceiver() {
 
     companion object {
         fun createIntent(
-                context: Context,
-                notificationContent: NotificationContent
+            context: Context,
+            notificationContent: NotificationContent
         ): Intent {
             return Intent(context, NotificationBroadcastReceiver::class.java).apply {
                 notificationContent.putExtrasTo(this)

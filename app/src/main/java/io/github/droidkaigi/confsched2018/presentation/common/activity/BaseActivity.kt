@@ -25,7 +25,7 @@ open class BaseActivity : DaggerAppCompatActivity() {
     private fun initTaskDescription() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setTaskDescription(ActivityManager.TaskDescription(
-                    null, null, ContextCompat.getColor(this, R.color.recents_background))
+                null, null, ContextCompat.getColor(this, R.color.recents_background))
             )
         }
     }

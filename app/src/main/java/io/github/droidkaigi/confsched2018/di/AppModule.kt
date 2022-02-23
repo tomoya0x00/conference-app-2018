@@ -20,13 +20,13 @@ import javax.inject.Singleton
 
     @Singleton @Provides @JvmStatic
     fun provideSessionRepository(
-            api: DroidKaigiApi,
-            sessionDatabase: SessionDatabase,
-            favoriteDatabase: FavoriteDatabase,
-            schedulerProvider: SchedulerProvider
+        api: DroidKaigiApi,
+        sessionDatabase: SessionDatabase,
+        favoriteDatabase: FavoriteDatabase,
+        schedulerProvider: SchedulerProvider
     ): SessionRepository =
-            SessionDataRepository(api, sessionDatabase, favoriteDatabase,
-                    schedulerProvider)
+        SessionDataRepository(api, sessionDatabase, favoriteDatabase,
+            schedulerProvider)
 
     @Singleton @Provides @JvmStatic
     fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
@@ -35,5 +35,5 @@ import javax.inject.Singleton
     @Provides
     @JvmStatic
     fun provideNotificationManager(context: Context): NotificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 }

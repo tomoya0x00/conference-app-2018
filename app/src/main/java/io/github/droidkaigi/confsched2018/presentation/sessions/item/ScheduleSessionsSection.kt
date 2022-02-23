@@ -7,24 +7,24 @@ import io.github.droidkaigi.confsched2018.model.Session
 
 class ScheduleSessionsSection : Section() {
     fun updateSessions(
-            sessions: List<Session>,
-            onFavoriteClickListener: (Session.SpeechSession) -> Unit,
-            onFeedbackListener: (Session.SpeechSession) -> Unit
+        sessions: List<Session>,
+        onFavoriteClickListener: (Session.SpeechSession) -> Unit,
+        onFeedbackListener: (Session.SpeechSession) -> Unit
     ) {
         val sessionItems = sessions.sortedWith(SessionComparator).map {
             when (it) {
                 is Session.SpeechSession -> {
                     SpeechSessionItem(
-                            session = it,
-                            simplify = true,
-                            onFavoriteClickListener = onFavoriteClickListener,
-                            onFeedbackListener = onFeedbackListener
+                        session = it,
+                        simplify = true,
+                        onFavoriteClickListener = onFavoriteClickListener,
+                        onFeedbackListener = onFeedbackListener
                     )
                 }
                 is Session.SpecialSession -> {
                     @Suppress("USELESS_CAST")
                     SpecialSessionItem(
-                            session = it
+                        session = it
                     ) as Item<*>
                 }
             }

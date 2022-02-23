@@ -7,38 +7,38 @@ import androidx.core.app.TaskStackBuilder
 import io.github.droidkaigi.confsched2018.presentation.MainActivity
 
 sealed class NotificationContent(
-        open val title: String,
-        open val text: String,
-        val channelType: NotificationChannelType
+    open val title: String,
+    open val text: String,
+    val channelType: NotificationChannelType
 ) {
     enum class NotificationType {
         FAVORITE_SESSION_START_NOTIFICATION
     }
 
     data class FavoriteSessionStart(
-            override val title: String,
-            override val text: String,
-            val sessionId: String
+        override val title: String,
+        override val text: String,
+        val sessionId: String
     ) : NotificationContent(
-            title,
-            text,
-            NotificationChannelType.FAVORITE_SESSION_START
+        title,
+        text,
+        NotificationChannelType.FAVORITE_SESSION_START
     ) {
         override fun createPendingContentIntent(context: Context): PendingIntent {
             return TaskStackBuilder
-                    .create(context)
-                    .addNextIntent(MainActivity.createIntent(context))
-                    .getPendingIntent(
-                            sessionId.hashCode(),
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                    ) as PendingIntent
+                .create(context)
+                .addNextIntent(MainActivity.createIntent(context))
+                .getPendingIntent(
+                    sessionId.hashCode(),
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                ) as PendingIntent
         }
 
         override fun putExtrasTo(intent: Intent) {
             intent.apply {
                 putExtra(
-                        EXTRA_NOTIFICATION_ID,
-                        NotificationType.FAVORITE_SESSION_START_NOTIFICATION.ordinal
+                    EXTRA_NOTIFICATION_ID,
+                    NotificationType.FAVORITE_SESSION_START_NOTIFICATION.ordinal
                 )
                 putExtra(EXTRA_SESSION_ID, sessionId)
                 putExtra(EXTRA_TITLE, title)
@@ -49,9 +49,9 @@ sealed class NotificationContent(
         companion object {
             fun parse(intent: Intent): FavoriteSessionStart {
                 return FavoriteSessionStart(
-                        intent.getStringExtra(EXTRA_TITLE) ?: "",
-                        intent.getStringExtra(EXTRA_TEXT) ?: "",
-                        intent.getStringExtra(EXTRA_SESSION_ID) ?: ""
+                    intent.getStringExtra(EXTRA_TITLE) ?: "",
+                    intent.getStringExtra(EXTRA_TEXT) ?: "",
+                    intent.getStringExtra(EXTRA_SESSION_ID) ?: ""
                 )
             }
         }

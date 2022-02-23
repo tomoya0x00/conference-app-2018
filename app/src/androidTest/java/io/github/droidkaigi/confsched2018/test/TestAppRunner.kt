@@ -7,6 +7,6 @@ import androidx.test.runner.AndroidJUnitRunner
 class TestAppRunner : AndroidJUnitRunner() {
 
     override fun newApplication(cl: ClassLoader?, className: String?, context: Context?):
-            Application = super.newApplication(cl, TestApp::class.java.name, context)
+        Application = super.newApplication(cl, TestApp::class.java.name, context)
 
 }

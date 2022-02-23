@@ -25,9 +25,9 @@ object Depends {
         const val core = "androidx.core:core-ktx:1.7.0"
         const val fragment = "androidx.fragment:fragment-ktx:1.4.0"
         const val activity = "androidx.activity:activity-ktx:1.4.0"
-        const val viewModel =  "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val lifecycle = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-        const val reactivestreams =  "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
+        const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"
         const val browser = "androidx.browser:browser:1.4.0"
         const val constraint = "androidx.constraintlayout:constraintlayout:2.1.2"
         const val emoji = "androidx.emoji:emoji-appcompat:1.1.0"
@@ -93,7 +93,7 @@ object Depends {
     }
 
     const val downloadableCalligraphy =
-            "com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.5"
+        "com.github.takahirom.downloadable.calligraphy:downloadable-calligraphy:0.1.5"
 
     object Stetho {
         const val core = "com.facebook.stetho:stetho:${Versions.stetho}"
@@ -120,5 +120,5 @@ object Depends {
     const val threetenbp = "org.threeten:threetenbp:1.5.2"
 
     const val guavaListenableFutureOnly =
-            "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
+        "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava"
 }

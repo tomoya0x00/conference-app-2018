@@ -28,22 +28,22 @@ fun createDummySession(sessionId: String = DUMMY_SESSION_ID1,
                        startTime: Long = 10000,
                        endTime: Long = 10000): Session.SpeechSession {
     return Session.SpeechSession(
-            id = sessionId,
-            dayNumber = dayNumber,
-            startTime = Date(startTime),
-            endTime = Date(endTime),
-            title = title,
-            desc = "How to create DroidKaigi app",
-            room = Room(1, "Hall"),
-            format = "30分",
-            language = "JA",
-            topic = Topic(2, "Development tool"),
-            level = Level.of(BEGINNER, "Beginner"),
-            isFavorited = true, speakers = listOf(
-            createDummySpeaker(),
-            createDummySpeaker()
+        id = sessionId,
+        dayNumber = dayNumber,
+        startTime = Date(startTime),
+        endTime = Date(endTime),
+        title = title,
+        desc = "How to create DroidKaigi app",
+        room = Room(1, "Hall"),
+        format = "30分",
+        language = "JA",
+        topic = Topic(2, "Development tool"),
+        level = Level.of(BEGINNER, "Beginner"),
+        isFavorited = true, speakers = listOf(
+        createDummySpeaker(),
+        createDummySpeaker()
     ),
-            message = null
+        message = null
     )
 }
 
@@ -51,83 +51,71 @@ fun createDummySpecialSession(dayNumber: Int = 1,
                               startTime: Long = 10000,
                               endTime: Long = 10000): Session.SpecialSession {
     return Session.SpecialSession(
-            id = DUMMY_SESSION_ID1,
-            dayNumber = dayNumber,
-            startTime = Date(startTime),
-            endTime = Date(endTime),
-            title = 0,
-            room = Room(1, "Hall")
+        id = DUMMY_SESSION_ID1,
+        dayNumber = dayNumber,
+        startTime = Date(startTime),
+        endTime = Date(endTime),
+        title = 0,
+        room = Room(1, "Hall")
     )
 }
 
 fun createDummySpeaker(): Speaker {
     return Speaker(
-            id = "tmtm",
-            name = "tm",
-            tagLine = "this is sample",
-            imageUrl = "http://example.com",
-            twitterUrl = "http://twitter.com/",
-            githubUrl = null,
-            blogUrl = null, companyUrl = null
+        id = "tmtm",
+        name = "tm",
+        tagLine = "this is sample",
+        imageUrl = "http://example.com",
+        twitterUrl = "http://twitter.com/",
+        githubUrl = null,
+        blogUrl = null, companyUrl = null
     )
 }
 
 fun createDummySpeakerEntities(): List<SpeakerEntity> {
     return listOf(
-            createDummySpeakerEntry1(),
-            createDummySpeakerEntry2()
+        createDummySpeakerEntry1(),
+        createDummySpeakerEntry2()
     )
 }
 
 fun createDummySpeakerEntry2(): SpeakerEntity {
     return SpeakerEntity(
-            "bbbb"
-            , "hogehuga"
-            , "this is dummy"
-            , "https://example.com"
-            , "http://example.com/hoge"
-            , null
-            , null, "http://example.github.com/hoge"
+        "bbbb", "hogehuga", "this is dummy", "https://example.com", "http://example.com/hoge", null, null, "http://example.github.com/hoge"
     )
 }
 
 fun createDummySpeakerEntry1(): SpeakerEntity {
     return SpeakerEntity(
-            "aaaa"
-            , "hogehoge"
-            , "this is sample"
-            , "https://example.com"
-            , "http://example.com/hoge"
-            , null
-            , null, "http://example.github.com/hoge"
+        "aaaa", "hogehoge", "this is sample", "https://example.com", "http://example.com/hoge", null, null, "http://example.github.com/hoge"
     )
 }
 
 fun createDummySessionWithSpeakersEntities(): List<SessionWithSpeakers> {
     return listOf(
-            SessionWithSpeakers(SessionEntity(DUMMY_SESSION_ID1,
-                    DUMMY_SESSION_TITLE1,
-                    "Endless battle",
-                    LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
-                    LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
-                    "30分",
-                    "日本語",
-                    LevelEntity(NICHE, "ニッチ / Niche"),
-                    TopicEntity(1, "開発環境 / Development"),
-                    RoomEntity(1, "ホール"),
-                    null),
-                    listOf("aaaa", "bbbb")),
-            SessionWithSpeakers(SessionEntity(DUMMY_SESSION_ID2,
-                    DUMMY_SESSION_TITLE2,
-                    "Endless battle",
-                    LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
-                    LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
-                    "30分",
-                    "日本語",
-                    LevelEntity(NICHE, "ニッチ / Niche"),
-                    TopicEntity(1, "開発環境 / Development"),
-                    RoomEntity(1, "ホール"),
-                    null),
-                    listOf("aaaa"))
+        SessionWithSpeakers(SessionEntity(DUMMY_SESSION_ID1,
+            DUMMY_SESSION_TITLE1,
+            "Endless battle",
+            LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
+            LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
+            "30分",
+            "日本語",
+            LevelEntity(NICHE, "ニッチ / Niche"),
+            TopicEntity(1, "開発環境 / Development"),
+            RoomEntity(1, "ホール"),
+            null),
+            listOf("aaaa", "bbbb")),
+        SessionWithSpeakers(SessionEntity(DUMMY_SESSION_ID2,
+            DUMMY_SESSION_TITLE2,
+            "Endless battle",
+            LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
+            LocalDateTime.of(1, 1, 1, 1, 1).atJST().toInstant(),
+            "30分",
+            "日本語",
+            LevelEntity(NICHE, "ニッチ / Niche"),
+            TopicEntity(1, "開発環境 / Development"),
+            RoomEntity(1, "ホール"),
+            null),
+            listOf("aaaa"))
     )
 }

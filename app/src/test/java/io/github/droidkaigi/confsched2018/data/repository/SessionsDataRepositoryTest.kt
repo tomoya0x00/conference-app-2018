@@ -55,7 +55,7 @@ class SessionsDataRepositoryTest {
                         LocalDate.of(1, 1, 1)
                     )
                 }
-                        + SpecialSessions.getSessions()
+                    + SpecialSessions.getSessions()
             )
 
         verify(sessionDatabase).getAllSessions()

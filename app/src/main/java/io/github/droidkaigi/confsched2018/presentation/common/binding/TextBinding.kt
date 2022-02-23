@@ -27,8 +27,8 @@ import java.util.regex.Pattern
 @BindingAdapter(value = ["dayNumber"])
 fun TextView.setDayText(dayNumber: Int) {
     text = context.getString(
-            R.string.session_day_title,
-            dayNumber
+        R.string.session_day_title,
+        dayNumber
     )
 }
 
@@ -37,9 +37,9 @@ fun TextView.setPeriodText(startDate: Date?, endDate: Date?) {
     startDate ?: return
     endDate ?: return
     text = context.getString(
-            R.string.time_period,
-            startDate.toReadableTimeString(),
-            endDate.toReadableTimeString()
+        R.string.time_period,
+        startDate.toReadableTimeString(),
+        endDate.toReadableTimeString()
     )
 }
 
@@ -72,16 +72,16 @@ fun TextView.setHighlightText(highlightText: String?) {
     val matcher = pattern.matcher(text)
     while (matcher.find()) {
         stringBuilder.setSpan(
-                BackgroundColorSpan(ContextCompat.getColor(context, R.color.highlight_text)),
-                matcher.start(),
-                matcher.end(),
-                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            BackgroundColorSpan(ContextCompat.getColor(context, R.color.highlight_text)),
+            matcher.start(),
+            matcher.end(),
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
         )
         stringBuilder.setSpan(
-                StyleSpan(Typeface.BOLD),
-                matcher.start(),
-                matcher.end(),
-                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+            StyleSpan(Typeface.BOLD),
+            matcher.start(),
+            matcher.end(),
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
         )
     }
     text = stringBuilder
@@ -97,10 +97,10 @@ fun TextView.setVectorDrawableStart(drawable: Drawable) {
 
     val drawables = compoundDrawables
     setCompoundDrawablesWithIntrinsicBounds(
-            vectorDrawable,
-            drawables[1],
-            drawables[2],
-            drawables[3]
+        vectorDrawable,
+        drawables[1],
+        drawables[2],
+        drawables[3]
     )
 }
 
@@ -126,7 +126,7 @@ fun TextView.setTextIsSelectable(selectable: Boolean, menuWebSearchEnabled: Bool
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 if (menuWebSearchEnabled) {
                     menu?.add(Menu.NONE, R.id.text_view_menu_web_search,
-                            Menu.NONE, R.string.web_search)
+                        Menu.NONE, R.string.web_search)
                 }
 
                 return true

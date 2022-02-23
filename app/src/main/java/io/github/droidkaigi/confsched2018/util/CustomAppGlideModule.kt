@@ -17,12 +17,12 @@ class CustomAppGlideModule : AppGlideModule() {
 
     override fun registerComponents(context: Context, glide: Glide, registry: Registry) {
         val client = OkHttpClient
-                .Builder()
-                .readTimeout(15, TimeUnit.SECONDS)
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .addNetworkInterceptor(HttpLoggingInterceptor()
-                        .setLevel(HttpLoggingInterceptor.Level.HEADERS))
-                .build()
+            .Builder()
+            .readTimeout(15, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
+            .addNetworkInterceptor(HttpLoggingInterceptor()
+                .setLevel(HttpLoggingInterceptor.Level.HEADERS))
+            .build()
 
         val factory = OkHttpUrlLoader.Factory(client)
 

@@ -8,20 +8,20 @@ import java.util.SortedMap
 
 class FavoriteSessionsSection : Section() {
     fun updateSessions(
-            sessions: List<Session.SpeechSession>,
-            onFavoriteClickListener: (Session.SpeechSession) -> Unit,
-            onFeedbackListener: (Session.SpeechSession) -> Unit
+        sessions: List<Session.SpeechSession>,
+        onFavoriteClickListener: (Session.SpeechSession) -> Unit,
+        onFeedbackListener: (Session.SpeechSession) -> Unit
     ) {
         val sessionItems = sessions.map {
             SpeechSessionItem(
-                    it,
-                    onFavoriteClickListener,
-                    onFeedbackListener,
-                    simplify = true)
+                it,
+                onFavoriteClickListener,
+                onFeedbackListener,
+                simplify = true)
         }
 
         val dateSpeechSessionItemsMap: SortedMap<Date, List<SpeechSessionItem>> =
-                sessionItems.groupBy { it.session.startTime }.toSortedMap()
+            sessionItems.groupBy { it.session.startTime }.toSortedMap()
 
         val dateSessions = arrayListOf<Item<*>>()
         dateSpeechSessionItemsMap.keys.forEach { startTime ->

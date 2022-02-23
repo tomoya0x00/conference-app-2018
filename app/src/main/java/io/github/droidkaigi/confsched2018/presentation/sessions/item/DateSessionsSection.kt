@@ -8,34 +8,34 @@ import java.util.SortedMap
 
 class DateSessionsSection : Section() {
     fun updateSessions(
-            sessions: List<Session>,
-            onFavoriteClickListener: (Session.SpeechSession) -> Unit,
-            onFeedbackListener: (Session.SpeechSession) -> Unit,
-            isShowDayNumber: Boolean = false
+        sessions: List<Session>,
+        onFavoriteClickListener: (Session.SpeechSession) -> Unit,
+        onFeedbackListener: (Session.SpeechSession) -> Unit,
+        isShowDayNumber: Boolean = false
     ) {
         val sessionItems = sessions.map {
             when (it) {
                 is Session.SpeechSession -> {
                     @Suppress("USELESS_CAST")
                     SpeechSessionItem(
-                            session = it,
-                            onFavoriteClickListener = onFavoriteClickListener,
-                            onFeedbackListener = onFeedbackListener,
-                            isShowDayNumber = isShowDayNumber
+                        session = it,
+                        onFavoriteClickListener = onFavoriteClickListener,
+                        onFeedbackListener = onFeedbackListener,
+                        isShowDayNumber = isShowDayNumber
                     ) as SessionItem
                 }
                 is Session.SpecialSession -> {
                     @Suppress("USELESS_CAST")
                     SpecialSessionItem(
-                            session = it,
-                            isShowDayNumber = isShowDayNumber
+                        session = it,
+                        isShowDayNumber = isShowDayNumber
                     ) as SessionItem
                 }
             }
         }
 
         val dateSpeechSessionItemsMap: SortedMap<Date, List<SessionItem>> =
-                sessionItems.groupBy { it.session.startTime }.toSortedMap()
+            sessionItems.groupBy { it.session.startTime }.toSortedMap()
 
         val dateSessions = arrayListOf<Item<*>>()
         dateSpeechSessionItemsMap.keys.forEach { startTime ->

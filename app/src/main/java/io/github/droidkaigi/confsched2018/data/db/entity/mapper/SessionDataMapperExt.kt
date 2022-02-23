@@ -17,9 +17,9 @@ import org.threeten.bp.Period
 import java.util.Date
 
 fun SessionWithSpeakers.toSession(
-        speakerEntities: List<SpeakerEntity>,
-        favList: List<Int>?,
-        firstDay: LocalDate
+    speakerEntities: List<SpeakerEntity>,
+    favList: List<Int>?,
+    firstDay: LocalDate
 ): Session.SpeechSession {
     val sessionEntity = session!!
     require(speakerIdList.isNotEmpty())
@@ -29,44 +29,44 @@ fun SessionWithSpeakers.toSession(
     }
     require(speakers.isNotEmpty())
     return Session.SpeechSession(
-            id = sessionEntity.id,
-            // dayNumber is starts with 1. Example: First day = 1, Second day = 2. So I plus 1 to period days
-            dayNumber = Period.between(
-                    firstDay, sessionEntity.stime.atJST().toLocalDate()).days + 1,
-            startTime = Date(sessionEntity.stime.toEpochMilli()),
-            endTime = Date(sessionEntity.etime.toEpochMilli()),
-            title = sessionEntity.title,
-            desc = sessionEntity.desc,
-            room = Room(sessionEntity.room.id, sessionEntity.room.name),
-            format = sessionEntity.sessionFormat,
-            language = sessionEntity.language,
-            topic = Topic(sessionEntity.topic.id, sessionEntity.topic.name),
-            level = Level.of(sessionEntity.level.id, sessionEntity.level.name),
-            isFavorited = favList!!.map { it.toString() }.contains(sessionEntity.id),
-            speakers = speakers,
-            message = if (sessionEntity.message == null) {
-                null
-            } else {
-                SessionMessage(sessionEntity.message.ja, sessionEntity.message.en)
-            }
+        id = sessionEntity.id,
+        // dayNumber is starts with 1. Example: First day = 1, Second day = 2. So I plus 1 to period days
+        dayNumber = Period.between(
+            firstDay, sessionEntity.stime.atJST().toLocalDate()).days + 1,
+        startTime = Date(sessionEntity.stime.toEpochMilli()),
+        endTime = Date(sessionEntity.etime.toEpochMilli()),
+        title = sessionEntity.title,
+        desc = sessionEntity.desc,
+        room = Room(sessionEntity.room.id, sessionEntity.room.name),
+        format = sessionEntity.sessionFormat,
+        language = sessionEntity.language,
+        topic = Topic(sessionEntity.topic.id, sessionEntity.topic.name),
+        level = Level.of(sessionEntity.level.id, sessionEntity.level.name),
+        isFavorited = favList!!.map { it.toString() }.contains(sessionEntity.id),
+        speakers = speakers,
+        message = if (sessionEntity.message == null) {
+            null
+        } else {
+            SessionMessage(sessionEntity.message.ja, sessionEntity.message.en)
+        }
     )
 }
 
 fun SpeakerEntity.toSpeaker(): Speaker = Speaker(
-        id = id,
-        name = name,
-        tagLine = tagLine,
-        imageUrl = imageUrl,
-        twitterUrl = twitterUrl,
-        companyUrl = companyUrl,
-        blogUrl = blogUrl,
-        githubUrl = githubUrl
+    id = id,
+    name = name,
+    tagLine = tagLine,
+    imageUrl = imageUrl,
+    twitterUrl = twitterUrl,
+    companyUrl = companyUrl,
+    blogUrl = blogUrl,
+    githubUrl = githubUrl
 )
 
 @VisibleForTesting
 fun List<RoomEntity>.toRooms() =
-        map { Room(it.id, it.name) }
+    map { Room(it.id, it.name) }
 
 @VisibleForTesting
 fun List<TopicEntity>.toTopics() =
-        map { Topic(it.id, it.name) }
+    map { Topic(it.id, it.name) }

@@ -27,14 +27,14 @@ class NotificationDebotStrategy : DebotStrategy() {
         val displaySTime = startTime.toReadableDateTimeString()
         val displayETime = endTime.toReadableDateTimeString()
         val text = context.getString(R.string.notification_message,
-                displaySTime,
-                displayETime,
-                roomName)
+            displaySTime,
+            displayETime,
+            roomName)
         val notificationContent = NotificationContent.FavoriteSessionStart(title, text, id)
 
         val intent = NotificationBroadcastReceiver.createIntent(
-                context,
-                notificationContent
+            context,
+            notificationContent
         )
 
         context.sendBroadcast(intent)

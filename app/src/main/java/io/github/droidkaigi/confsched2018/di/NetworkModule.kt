@@ -15,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
 @Module(
-        includes = [BuildTypeBasedNetworkModule::class]
+    includes = [BuildTypeBasedNetworkModule::class]
 )
 open class NetworkModule {
 
@@ -26,50 +26,50 @@ open class NetworkModule {
     @Singleton @Provides
     fun provideOkHttpClient(@NetworkLogger loggingInterceptors: Set<@JvmSuppressWildcards
     Interceptor>):
-            OkHttpClient =
-            OkHttpClient.Builder().apply {
-                loggingInterceptors.forEach {
-                    addNetworkInterceptor(it)
-                }
-            }.build()
+        OkHttpClient =
+        OkHttpClient.Builder().apply {
+            loggingInterceptors.forEach {
+                addNetworkInterceptor(it)
+            }
+        }.build()
 
     @RetrofitDroidKaigi @Singleton @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl("https://droidkaigi.jp/2018/")
-                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
-                        .add(ApplicationJsonAdapterFactory)
-                        .add(Instant::class.java, InstantAdapter())
-                        .build()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
-                .build()
+            .client(okHttpClient)
+            .baseUrl("https://droidkaigi.jp/2018/")
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+                .add(ApplicationJsonAdapterFactory)
+                .add(Instant::class.java, InstantAdapter())
+                .build()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
+            .build()
     }
 
     @RetrofitGoogleForm @Singleton @Provides
     fun provideRetrofitForGoogleForm(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .client(okHttpClient)
-                .baseUrl("https://docs.google.com/forms/d/")
-                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
-                        .add(ApplicationJsonAdapterFactory)
-                        .add(Instant::class.java, InstantAdapter())
-                        .build()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
-                .build()
+            .client(okHttpClient)
+            .baseUrl("https://docs.google.com/forms/d/")
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+                .add(ApplicationJsonAdapterFactory)
+                .add(Instant::class.java, InstantAdapter())
+                .build()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
+            .build()
     }
 
     @RetrofitGithub @Singleton @Provides
     fun provideRetrofitForGithub(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("https://api.github.com")
-                .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
-                        .add(ApplicationJsonAdapterFactory)
-                        .add(Instant::class.java, InstantAdapter())
-                        .build()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
-                .client(okHttpClient)
-                .build()
+            .baseUrl("https://api.github.com")
+            .addConverterFactory(MoshiConverterFactory.create(Moshi.Builder()
+                .add(ApplicationJsonAdapterFactory)
+                .add(Instant::class.java, InstantAdapter())
+                .build()))
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
+            .client(okHttpClient)
+            .build()
     }
 
     @Singleton @Provides

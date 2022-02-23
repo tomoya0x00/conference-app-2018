@@ -16,26 +16,26 @@ import javax.inject.Inject
 import kotlin.reflect.KClass
 
 class DrawerMenu @Inject constructor(
-        private val activity: AppCompatActivity,
-        private val navigationController: NavigationController
+    private val activity: AppCompatActivity,
+    private val navigationController: NavigationController
 ) {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var currentNavigationItem: DrawerNavigationItem
 
     fun setup(
-            drawerLayout: DrawerLayout,
-            navigationView: NavigationView,
-            toolbar: Toolbar? = null,
-            actionBarDrawerSync: Boolean = false
+        drawerLayout: DrawerLayout,
+        navigationView: NavigationView,
+        toolbar: Toolbar? = null,
+        actionBarDrawerSync: Boolean = false
     ) {
         this.drawerLayout = drawerLayout
         if (actionBarDrawerSync) {
             object : ActionBarDrawerToggle(
-                    activity,
-                    drawerLayout,
-                    toolbar,
-                    R.string.nav_content_description_drawer_open,
-                    R.string.nav_content_description_drawer_close
+                activity,
+                drawerLayout,
+                toolbar,
+                R.string.nav_content_description_drawer_open,
+                R.string.nav_content_description_drawer_close
             ) {
                 override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                     super.onDrawerSlide(drawerView, slideOffset)
@@ -53,24 +53,24 @@ class DrawerMenu @Inject constructor(
         }
         navigationView.setNavigationItemSelectedListener { item ->
             DrawerNavigationItem
-                    .values()
-                    .firstOrNull { it.menuId == item.itemId }
-                    ?.apply {
-                        if (this != currentNavigationItem) {
-                            navigate(navigationController)
-                        }
+                .values()
+                .firstOrNull { it.menuId == item.itemId }
+                ?.apply {
+                    if (this != currentNavigationItem) {
+                        navigate(navigationController)
                     }
+                }
             drawerLayout.closeDrawers()
             false
         }
 
         currentNavigationItem = DrawerNavigationItem
-                .values()
-                .firstOrNull { activity::class == it.activityClass }
-                ?.also {
-                    navigationView.setCheckedItem(it.menuId)
-                }
-                ?: DrawerNavigationItem.OTHER
+            .values()
+            .firstOrNull { activity::class == it.activityClass }
+            ?.also {
+                navigationView.setCheckedItem(it.menuId)
+            }
+            ?: DrawerNavigationItem.OTHER
     }
 
     fun closeDrawerIfNeeded(): Boolean {
@@ -83,9 +83,9 @@ class DrawerMenu @Inject constructor(
     }
 
     enum class DrawerNavigationItem(
-            @IdRes val menuId: Int,
-            val activityClass: KClass<*>,
-            val navigate: NavigationController.() -> Unit
+        @IdRes val menuId: Int,
+        val activityClass: KClass<*>,
+        val navigate: NavigationController.() -> Unit
     ) {
         HOME(R.id.nav_item_home, MainActivity::class, {
             navigateToMainActivity()

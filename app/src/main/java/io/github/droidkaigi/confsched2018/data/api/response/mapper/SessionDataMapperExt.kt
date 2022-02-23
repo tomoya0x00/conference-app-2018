@@ -18,19 +18,19 @@ fun List<Session>?.toSessionSpeakerJoinEntities(): List<SessionSpeakerJoinEntity
     this!!.forEach { responseSession ->
         responseSession.speakers!!.forEach { speakerId ->
             sessionSpeakerJoinEntity +=
-                    SessionSpeakerJoinEntity(responseSession.id, speakerId!!)
+                SessionSpeakerJoinEntity(responseSession.id, speakerId!!)
         }
     }
     return sessionSpeakerJoinEntity
 }
 
 fun List<Session>?.toSessionEntities(
-        categories: List<Category>?,
-        rooms: List<Room>?
+    categories: List<Category>?,
+    rooms: List<Room>?
 ): List<SessionEntity> =
-        this!!.map {
-            it.toSessionEntity(categories, rooms)
-        }
+    this!!.map {
+        it.toSessionEntity(categories, rooms)
+    }
 
 fun Session.toSessionEntity(categories: List<Category>?, rooms: List<Room>?): SessionEntity {
     val sessionFormat = categories.category(0, categoryItems!![0])
@@ -38,47 +38,47 @@ fun Session.toSessionEntity(categories: List<Category>?, rooms: List<Room>?): Se
     val topic = categories.category(2, categoryItems[2])
     val level = categories.category(3, categoryItems[3])
     return SessionEntity(
-            id = id,
-            title = title!!,
-            desc = description!!,
-            stime = startsAt!!,
-            etime = endsAt!!,
-            sessionFormat = sessionFormat.name!!,
-            language = language.name!!,
-            message = if (message != null) {
-                MessageEntity(message.ja!!, message.en!!)
-            } else {
-                null
-            },
-            topic = TopicEntity(topic.id!!, topic.name!!),
-            level = LevelEntity(level.id!!, level.name!!),
-            room = RoomEntity(roomId!!, rooms.roomName(roomId))
+        id = id,
+        title = title!!,
+        desc = description!!,
+        stime = startsAt!!,
+        etime = endsAt!!,
+        sessionFormat = sessionFormat.name!!,
+        language = language.name!!,
+        message = if (message != null) {
+            MessageEntity(message.ja!!, message.en!!)
+        } else {
+            null
+        },
+        topic = TopicEntity(topic.id!!, topic.name!!),
+        level = LevelEntity(level.id!!, level.name!!),
+        room = RoomEntity(roomId!!, rooms.roomName(roomId))
     )
 }
 
 fun List<Speaker>?.toSpeakerEntities(): List<SpeakerEntity> =
-        this!!.map { responseSpeaker ->
-            SpeakerEntity(id = responseSpeaker.id!!,
-                    name = responseSpeaker.fullName!!,
-                    tagLine = responseSpeaker.tagLine!!,
-                    imageUrl = responseSpeaker.profilePicture.orEmpty(),
-                    twitterUrl = responseSpeaker.links
-                            ?.firstOrNull { "Twitter" == it?.linkType }
-                            ?.url,
-                    companyUrl = responseSpeaker.links
-                            ?.firstOrNull { "Company_Website" == it?.linkType }
-                            ?.url,
-                    blogUrl = responseSpeaker.links
-                            ?.firstOrNull { "Blog" == it?.linkType }
-                            ?.url,
-                    githubUrl = responseSpeaker.links
-                            ?.firstOrNull { "GitHub" == it?.title || "Github" == it?.title }
-                            ?.url
-            )
-        }
+    this!!.map { responseSpeaker ->
+        SpeakerEntity(id = responseSpeaker.id!!,
+            name = responseSpeaker.fullName!!,
+            tagLine = responseSpeaker.tagLine!!,
+            imageUrl = responseSpeaker.profilePicture.orEmpty(),
+            twitterUrl = responseSpeaker.links
+                ?.firstOrNull { "Twitter" == it?.linkType }
+                ?.url,
+            companyUrl = responseSpeaker.links
+                ?.firstOrNull { "Company_Website" == it?.linkType }
+                ?.url,
+            blogUrl = responseSpeaker.links
+                ?.firstOrNull { "Blog" == it?.linkType }
+                ?.url,
+            githubUrl = responseSpeaker.links
+                ?.firstOrNull { "GitHub" == it?.title || "Github" == it?.title }
+                ?.url
+        )
+    }
 
 private fun List<Category>?.category(categoryIndex: Int, categoryId: Int?): CategoryItem =
-        this!![categoryIndex].items!!.first { it!!.id == categoryId }!!
+    this!![categoryIndex].items!!.first { it!!.id == categoryId }!!
 
 private fun List<Room>?.roomName(roomId: Int?): String =
-        this!!.first { it.id == roomId }.name!!
+    this!!.first { it.id == roomId }.name!!

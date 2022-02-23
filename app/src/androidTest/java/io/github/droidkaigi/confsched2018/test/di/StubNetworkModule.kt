@@ -9,7 +9,6 @@ import retrofit2.Retrofit
 class StubNetworkModule : NetworkModule() {
 
     @Provides
-    override fun provideDroidKaigiApi(retrofit: Retrofit): DroidKaigiApi
-        = StubDroidKaigiApi()
+    override fun provideDroidKaigiApi(retrofit: Retrofit): DroidKaigiApi = StubDroidKaigiApi()
 
 }

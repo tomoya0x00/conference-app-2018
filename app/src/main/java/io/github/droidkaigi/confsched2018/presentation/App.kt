@@ -38,9 +38,9 @@ open class App : DaggerApplication() {
         if (FirebaseApp.getApps(this).isNotEmpty()) {
             val fireStore = FirebaseFirestore.getInstance()
             val settings = FirebaseFirestoreSettings.Builder()
-                    // https://github.com/DroidKaigi/conference-app-2018/issues/277#issuecomment-360171780
-                    .setPersistenceEnabled(false)
-                    .build()
+                // https://github.com/DroidKaigi/conference-app-2018/issues/277#issuecomment-360171780
+                .setPersistenceEnabled(false)
+                .build()
             fireStore.firestoreSettings = settings
             // push notification for new feed
             FirebaseMessaging.getInstance().subscribeToTopic(NewPostProcessor.TOPIC)
@@ -59,27 +59,27 @@ open class App : DaggerApplication() {
 
     private fun setupCalligraphy() {
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
-                .setDefaultFont(R.font.notosans_medium)
-                .build())
+            .setDefaultFont(R.font.notosans_medium)
+            .build())
     }
 
     private fun setupEmoji() {
         val fontRequest = FontRequest(
-                "com.google.android.gms.fonts",
-                "com.google.android.gms",
-                "Noto Color Emoji Compat",
-                R.array.com_google_android_gms_fonts_certs)
+            "com.google.android.gms.fonts",
+            "com.google.android.gms",
+            "Noto Color Emoji Compat",
+            R.array.com_google_android_gms_fonts_certs)
         val config = FontRequestEmojiCompatConfig(applicationContext, fontRequest)
-                .setReplaceAll(true)
-                .registerInitCallback(object : EmojiCompat.InitCallback() {
-                    override fun onInitialized() {
-                        Timber.i("EmojiCompat initialized")
-                    }
+            .setReplaceAll(true)
+            .registerInitCallback(object : EmojiCompat.InitCallback() {
+                override fun onInitialized() {
+                    Timber.i("EmojiCompat initialized")
+                }
 
-                    override fun onFailed(throwable: Throwable?) {
-                        Timber.e(throwable, "EmojiCompat initialization failed")
-                    }
-                })
+                override fun onFailed(throwable: Throwable?) {
+                    Timber.e(throwable, "EmojiCompat initialization failed")
+                }
+            })
         EmojiCompat.init(config)
     }
 
@@ -89,10 +89,10 @@ open class App : DaggerApplication() {
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
         return DaggerAppComponent.builder()
-                .application(this)
-                .networkModule(NetworkModule.instance)
-                .databaseModule(DatabaseModule.instance)
-                .build()
+            .application(this)
+            .networkModule(NetworkModule.instance)
+            .databaseModule(DatabaseModule.instance)
+            .build()
     }
 
     protected open fun isInUnitTests() = false

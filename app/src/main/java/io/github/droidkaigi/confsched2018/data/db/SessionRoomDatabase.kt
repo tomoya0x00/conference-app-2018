@@ -17,13 +17,13 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 
 class SessionRoomDatabase @Inject constructor(
-        private val database: RoomDatabase,
-        private val sessionDao: SessionDao,
-        private val speakerDao: SpeakerDao,
-        private val sessionSpeakerJoinDao: SessionSpeakerJoinDao
+    private val database: RoomDatabase,
+    private val sessionDao: SessionDao,
+    private val speakerDao: SpeakerDao,
+    private val sessionSpeakerJoinDao: SessionSpeakerJoinDao
 ) : SessionDatabase {
     @CheckResult override fun getAllSessions(): Flowable<List<SessionWithSpeakers>> =
-            sessionSpeakerJoinDao.getAllSessions()
+        sessionSpeakerJoinDao.getAllSessions()
 
     @CheckResult
     override fun getAllSpeaker(): Flowable<List<SpeakerEntity>> = speakerDao.getAllSpeaker()

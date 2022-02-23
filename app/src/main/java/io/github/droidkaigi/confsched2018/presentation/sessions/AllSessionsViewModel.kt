@@ -21,8 +21,8 @@ import io.reactivex.rxkotlin.subscribeBy
 import javax.inject.Inject
 
 class AllSessionsViewModel @Inject constructor(
-        private val repository: SessionRepository,
-        private val schedulerProvider: SchedulerProvider
+    private val repository: SessionRepository,
+    private val schedulerProvider: SchedulerProvider
 ) : ViewModel(), LifecycleObserver {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val mutableRefreshState: MutableLiveData<Result<Unit>> = MutableLiveData()
@@ -30,8 +30,8 @@ class AllSessionsViewModel @Inject constructor(
 
     val sessions: LiveData<Result<List<Session>>> by lazy {
         repository.sessions
-                .toResult(schedulerProvider)
-                .toLiveData()
+            .toResult(schedulerProvider)
+            .toLiveData()
     }
 
     val isLoading: LiveData<Boolean> by lazy {
@@ -41,8 +41,8 @@ class AllSessionsViewModel @Inject constructor(
     fun onFavoriteClick(session: Session.SpeechSession) {
         val favoriteSingle: Single<Boolean> = repository.favorite(session)
         favoriteSingle
-                .subscribeBy(onError = defaultErrorHandler())
-                .addTo(compositeDisposable)
+            .subscribeBy(onError = defaultErrorHandler())
+            .addTo(compositeDisposable)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
@@ -52,13 +52,13 @@ class AllSessionsViewModel @Inject constructor(
 
     private fun refreshSessions() {
         repository
-                .refreshSessions()
-                .toResult<Unit>(schedulerProvider)
-                .subscribeBy(
-                        onNext = { mutableRefreshState.postValue(it) },
-                        onError = defaultErrorHandler()
-                )
-                .addTo(compositeDisposable)
+            .refreshSessions()
+            .toResult<Unit>(schedulerProvider)
+            .subscribeBy(
+                onNext = { mutableRefreshState.postValue(it) },
+                onError = defaultErrorHandler()
+            )
+            .addTo(compositeDisposable)
     }
 
     fun onRetrySessions() {

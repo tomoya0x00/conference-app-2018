@@ -24,8 +24,8 @@ class DebugApp : App() {
 
     private fun setupDebot() {
         val builder = DebotStrategyBuilder.Builder()
-                .registerMenu("Send Notification", NotificationDebotStrategy())
-                .build()
+            .registerMenu("Send Notification", NotificationDebotStrategy())
+            .build()
 
         DebotConfigurator.configureWithCustomizedMenu(builder.strategyList)
         registerActivityLifecycleCallbacks(DebotObserver())

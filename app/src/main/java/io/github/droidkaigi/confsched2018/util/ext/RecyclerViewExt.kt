@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 inline fun RecyclerView.addOnScrollListener(
-        crossinline onScrollStateChanged: (recyclerView: RecyclerView?, newState: Int) -> Unit =
+    crossinline onScrollStateChanged: (recyclerView: RecyclerView?, newState: Int) -> Unit =
         { _, _ -> },
-        crossinline onScrolled: (recyclerView: RecyclerView?, dx: Int, dy: Int) -> Unit =
+    crossinline onScrolled: (recyclerView: RecyclerView?, dx: Int, dy: Int) -> Unit =
         { _, _, _ -> }
 ) {
     addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -27,8 +27,8 @@ inline fun RecyclerView.addOnScrollListener(
 }
 
 fun RecyclerView.setLinearDivider(
-        @DrawableRes drawableResId: Int,
-        linearLayoutManager: LinearLayoutManager
+    @DrawableRes drawableResId: Int,
+    linearLayoutManager: LinearLayoutManager
 ) {
     val context = this.context
     this.addItemDecoration(DividerItemDecoration(context, linearLayoutManager.orientation).apply {

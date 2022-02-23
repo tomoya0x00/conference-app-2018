@@ -8,14 +8,14 @@ import androidx.appcompat.widget.AppCompatImageView
 import io.github.droidkaigi.confsched2018.R
 
 class FavoriteButton @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0) : AppCompatImageView(context, attrs, defStyleAttr), Checkable {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0) : AppCompatImageView(context, attrs, defStyleAttr), Checkable {
 
     data class CustomAttribute(
-            val checked: Boolean,
-            val checkedColorTint: Int,
-            val uncheckedColorTint: Int)
+        val checked: Boolean,
+        val checkedColorTint: Int,
+        val uncheckedColorTint: Int)
 
     private var isChecked: Boolean = false
     private val customAttribute: CustomAttribute
@@ -32,14 +32,14 @@ class FavoriteButton @JvmOverloads constructor(
         val defaultAttribute = CustomAttribute(false, 0, 0)
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(attrs,
-                    R.styleable.FavoriteButton,
-                    0, 0)
+                R.styleable.FavoriteButton,
+                0, 0)
             val checked = a.getBoolean(R.styleable.FavoriteButton_android_checked,
-                    defaultAttribute.checked)
+                defaultAttribute.checked)
             val checkedColorTint = a.getColor(R.styleable.FavoriteButton_checkedColorTint,
-                    defaultAttribute.checkedColorTint)
+                defaultAttribute.checkedColorTint)
             val uncheckedColorTint = a.getColor(R.styleable.FavoriteButton_uncheckedColorTint,
-                    defaultAttribute.uncheckedColorTint)
+                defaultAttribute.uncheckedColorTint)
             a.recycle()
 
             return CustomAttribute(checked, checkedColorTint, uncheckedColorTint)

@@ -16,8 +16,8 @@ import javax.inject.Singleton
 
 @Singleton
 class NewPostProcessor @Inject constructor(
-        private val application: Application,
-        private val notificationManager: NotificationManager) : MessageProcessor {
+    private val application: Application,
+    private val notificationManager: NotificationManager) : MessageProcessor {
     override fun process(message: RemoteMessage) {
         if (message.data.isEmpty())
             return
@@ -25,33 +25,33 @@ class NewPostProcessor @Inject constructor(
         val content = message.data[KEY_CONTENT]
         val type = message.data[KEY_TYPE]
         val openPi = PendingIntent.getActivity(application,
-                0,
-                Intent(application, MainActivity::class.java)
-                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
-                // TODO open with announce fragment in front?
-                PendingIntent.FLAG_UPDATE_CURRENT)
+            0,
+            Intent(application, MainActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+            // TODO open with announce fragment in front?
+            PendingIntent.FLAG_UPDATE_CURRENT)
         val priority = when (type) {
             "notification" -> NotificationCompat.PRIORITY_HIGH
             "alert" -> NotificationCompat.PRIORITY_HIGH
             else -> NotificationCompat.PRIORITY_DEFAULT
         }
         val notification: Notification = NotificationCompat.Builder(application,
-                NotificationChannelType.NEW_FEED_POST.id)
-                .setStyle(
-                        NotificationCompat.BigTextStyle()
-                                .setBigContentTitle(title)
-                                .bigText(content)
-                )
-                .setAutoCancel(true)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setPriority(priority)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setShowWhen(true)
-                .setWhen(System.currentTimeMillis())
-                .setColor(ContextCompat.getColor(application, R.color.primary))
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setContentIntent(openPi)
-                .build()
+            NotificationChannelType.NEW_FEED_POST.id)
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                    .setBigContentTitle(title)
+                    .bigText(content)
+            )
+            .setAutoCancel(true)
+            .setSmallIcon(R.drawable.ic_notification)
+            .setPriority(priority)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setShowWhen(true)
+            .setWhen(System.currentTimeMillis())
+            .setColor(ContextCompat.getColor(application, R.color.primary))
+            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+            .setContentIntent(openPi)
+            .build()
         notificationManager.notify(NOTIFICATION_ID, notification)
     }
 

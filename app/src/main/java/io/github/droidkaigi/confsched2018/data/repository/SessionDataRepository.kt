@@ -18,40 +18,40 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class SessionDataRepository @Inject constructor(
-        private val api: DroidKaigiApi,
-        private val sessionDatabase: SessionDatabase,
-        private val favoriteDatabase: FavoriteDatabase,
-        private val schedulerProvider: SchedulerProvider
+    private val api: DroidKaigiApi,
+    private val sessionDatabase: SessionDatabase,
+    private val favoriteDatabase: FavoriteDatabase,
+    private val schedulerProvider: SchedulerProvider
 ) : SessionRepository {
 
     override val sessions: Flowable<List<Session>> =
-            Flowables.combineLatest(
-                    sessionDatabase.getAllSessions()
-                            .filter { it.isNotEmpty() }
-                            .doOnNext { if (DEBUG) Timber.d("getAllSessions") },
-                    sessionDatabase.getAllSpeaker()
-                            .filter { it.isNotEmpty() }
-                            .doOnNext { if (DEBUG) Timber.d("getAllSpeaker") },
-                    Flowable.concat(
-                            Flowable.just(listOf()),
-                            favoriteDatabase.favorites.onErrorReturn { listOf() }
-                    )
-                            .doOnNext { if (DEBUG) Timber.d("favorites") },
-                    { sessionEntities, speakerEntities, favList ->
-                        val firstDay = sessionEntities.first().session!!.stime.atJST().toLocalDate()
-                        val speakerSessions = sessionEntities
-                                .map { it.toSession(speakerEntities, favList, firstDay) }
-                                .sortedWith(compareBy(
-                                        { it.startTime.getTime() },
-                                        { it.room.id }
-                                ))
+        Flowables.combineLatest(
+            sessionDatabase.getAllSessions()
+                .filter { it.isNotEmpty() }
+                .doOnNext { if (DEBUG) Timber.d("getAllSessions") },
+            sessionDatabase.getAllSpeaker()
+                .filter { it.isNotEmpty() }
+                .doOnNext { if (DEBUG) Timber.d("getAllSpeaker") },
+            Flowable.concat(
+                Flowable.just(listOf()),
+                favoriteDatabase.favorites.onErrorReturn { listOf() }
+            )
+                .doOnNext { if (DEBUG) Timber.d("favorites") },
+            { sessionEntities, speakerEntities, favList ->
+                val firstDay = sessionEntities.first().session!!.stime.atJST().toLocalDate()
+                val speakerSessions = sessionEntities
+                    .map { it.toSession(speakerEntities, favList, firstDay) }
+                    .sortedWith(compareBy(
+                        { it.startTime.getTime() },
+                        { it.room.id }
+                    ))
 
-                        speakerSessions + specialSessions
-                    })
-                    .subscribeOn(schedulerProvider.io())
-                    .doOnNext {
-                        if (DEBUG) Timber.d("size:${it.size} current:${System.currentTimeMillis()}")
-                    }
+                speakerSessions + specialSessions
+            })
+            .subscribeOn(schedulerProvider.io())
+            .doOnNext {
+                if (DEBUG) Timber.d("size:${it.size} current:${System.currentTimeMillis()}")
+            }
 
     @VisibleForTesting
     val specialSessions: List<Session.SpecialSession> by lazy {
@@ -59,15 +59,15 @@ class SessionDataRepository @Inject constructor(
     }
 
     @CheckResult override fun favorite(session: Session.SpeechSession): Single<Boolean> =
-            favoriteDatabase.favorite(session)
+        favoriteDatabase.favorite(session)
 
     @CheckResult override fun refreshSessions(): Completable {
         return api.getSessions()
-                .doOnSuccess { response ->
-                    sessionDatabase.save(response)
-                }
-                .subscribeOn(schedulerProvider.io())
-                .toCompletable()
+            .doOnSuccess { response ->
+                sessionDatabase.save(response)
+            }
+            .subscribeOn(schedulerProvider.io())
+            .toCompletable()
     }
 
     companion object {

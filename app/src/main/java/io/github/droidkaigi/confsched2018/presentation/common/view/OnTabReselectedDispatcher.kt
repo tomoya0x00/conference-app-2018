@@ -5,7 +5,7 @@ import com.google.android.material.tabs.TabLayout
 
 
 class OnTabReselectedDispatcher(
-        private val viewPager: ViewPager
+    private val viewPager: ViewPager
 ) : TabLayout.OnTabSelectedListener {
 
     override fun onTabUnselected(tab: TabLayout.Tab) {

@@ -11,15 +11,15 @@ import io.github.droidkaigi.confsched2018.util.ext.drawable
 import io.github.droidkaigi.confsched2018.util.lang
 
 data class SpeechSessionItem(
-        override val session: Session.SpeechSession,
-        private val onFavoriteClickListener: (Session.SpeechSession) -> Unit,
-        private val onFeedbackListener: (Session.SpeechSession) -> Unit,
-        private val isShowDayNumber: Boolean = false,
-        private val searchQuery: String = "",
-        private val simplify: Boolean = false,
-        private val userIdInDetail: String? = null
+    override val session: Session.SpeechSession,
+    private val onFavoriteClickListener: (Session.SpeechSession) -> Unit,
+    private val onFeedbackListener: (Session.SpeechSession) -> Unit,
+    private val isShowDayNumber: Boolean = false,
+    private val searchQuery: String = "",
+    private val simplify: Boolean = false,
+    private val userIdInDetail: String? = null
 ) : BindableItem<ItemSpeechSessionBinding>(
-        session.id.toLong()
+    session.id.toLong()
 ), SessionItem {
 
     override fun bind(viewBinding: ItemSpeechSessionBinding, position: Int) {

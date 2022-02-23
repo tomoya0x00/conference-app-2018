@@ -19,9 +19,9 @@ import io.github.droidkaigi.confsched2018.model.Speaker
  * ref: https://github.com/DroidKaigi/conference-app-2018/issues/61
  */
 class SpeakersSummaryLayout @JvmOverloads constructor(
-        context: Context,
-        attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0) : LinearLayout(context, attrs, defStyleAttr) {
 
     data class CustomAttributes(val textColor: Int)
 
@@ -32,18 +32,18 @@ class SpeakersSummaryLayout @JvmOverloads constructor(
 
     private fun customAttributesFrom(context: Context, attrs: AttributeSet?): CustomAttributes {
         val defaultAttributes = CustomAttributes(
-                textColor = Color.BLACK
+            textColor = Color.BLACK
         )
 
         return attrs?.let {
             val a: TypedArray = context.theme.obtainStyledAttributes(attrs,
-                    R.styleable.SpeakersSummaryLayout, 0, 0)
+                R.styleable.SpeakersSummaryLayout, 0, 0)
             val textColor = a.getColor(R.styleable.SpeakersSummaryLayout_textColor,
-                    defaultAttributes.textColor)
+                defaultAttributes.textColor)
             a.recycle()
 
             return CustomAttributes(
-                    textColor = textColor
+                textColor = textColor
             )
         } ?: defaultAttributes
     }
@@ -93,10 +93,10 @@ class SpeakersSummaryLayout @JvmOverloads constructor(
 
         speakerAdapter.onSpeakerClick = { view, speakerId ->
             if (speakerIdInDetail == null ||
-                    (speakerIdInDetail != null && !speakerIdInDetail.equals(speakerId))) {
+                (speakerIdInDetail != null && !speakerIdInDetail.equals(speakerId))) {
                 val sharedElement = Pair(
-                        view.findViewById<View>(R.id.speaker_image),
-                        speakerId)
+                    view.findViewById<View>(R.id.speaker_image),
+                    speakerId)
                 // TODO: GOTO SpeakerDetail
             }
         }
