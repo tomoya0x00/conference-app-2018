@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import io.github.droidkaigi.confsched2018.data.db.entity.SessionSpeakerJoinEntity
 import io.github.droidkaigi.confsched2018.data.db.entity.SessionWithSpeakers
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 import org.intellij.lang.annotations.Language
 
 @Dao abstract class SessionSpeakerJoinDao {
@@ -15,7 +15,7 @@ import org.intellij.lang.annotations.Language
     @Transaction
     @CheckResult
     @Query("SELECT * FROM session")
-    abstract fun getAllSessions(): Flowable<List<SessionWithSpeakers>>
+    abstract fun getAllSessions(): Flow<List<SessionWithSpeakers>>
 
-    @Insert abstract fun insert(sessionSpeakerJoin: List<SessionSpeakerJoinEntity>)
+    @Insert abstract suspend fun insert(sessionSpeakerJoin: List<SessionSpeakerJoinEntity>)
 }

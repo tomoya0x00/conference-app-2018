@@ -2,9 +2,6 @@ package io.github.droidkaigi.confsched2018.data.repository
 
 import androidx.annotation.CheckResult
 import io.github.droidkaigi.confsched2018.model.Session
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Single
 import kotlinx.coroutines.flow.StateFlow
 
 interface SessionRepository {

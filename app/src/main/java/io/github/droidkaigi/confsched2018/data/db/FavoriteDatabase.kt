@@ -2,12 +2,11 @@ package io.github.droidkaigi.confsched2018.data.db
 
 import androidx.annotation.CheckResult
 import io.github.droidkaigi.confsched2018.model.Session
-import io.reactivex.Flowable
-import io.reactivex.Single
+import kotlinx.coroutines.flow.SharedFlow
 
 interface FavoriteDatabase {
 
-    @get:CheckResult val favorites: Flowable<List<Int>>
+    @get:CheckResult val favorites: SharedFlow<List<Int>>
 
-    @CheckResult fun favorite(session: Session): Single<Boolean>
+    @CheckResult suspend fun favorite(session: Session): Boolean
 }

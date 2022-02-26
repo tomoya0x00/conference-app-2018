@@ -6,12 +6,12 @@ import io.github.droidkaigi.confsched2018.data.db.entity.RoomEntity
 import io.github.droidkaigi.confsched2018.data.db.entity.SessionWithSpeakers
 import io.github.droidkaigi.confsched2018.data.db.entity.SpeakerEntity
 import io.github.droidkaigi.confsched2018.data.db.entity.TopicEntity
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 
 interface SessionDatabase {
-    @CheckResult fun getAllSessions(): Flowable<List<SessionWithSpeakers>>
-    @CheckResult fun getAllSpeaker(): Flowable<List<SpeakerEntity>>
-    @CheckResult fun getAllRoom(): Flowable<List<RoomEntity>>
-    @CheckResult fun getAllTopic(): Flowable<List<TopicEntity>>
-    fun save(response: Response)
+    @CheckResult fun getAllSessions(): Flow<List<SessionWithSpeakers>>
+    @CheckResult fun getAllSpeaker(): Flow<List<SpeakerEntity>>
+    @CheckResult fun getAllRoom(): Flow<List<RoomEntity>>
+    @CheckResult fun getAllTopic(): Flow<List<TopicEntity>>
+    suspend fun save(response: Response)
 }

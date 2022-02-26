@@ -3,6 +3,7 @@ object Depends {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0" // added
         const val coroutinesRx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.0" // added
+        const val coroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0" // added
     }
 
     object OkHttp3 {
@@ -37,6 +38,7 @@ object Depends {
             const val runtime = "androidx.room:room-runtime:${Versions.room}"
             const val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
             const val compiler = "androidx.room:room-compiler:${Versions.room}"
+            const val ktx = "androidx.room:room-ktx:${Versions.room}" // added
         }
 
         const val runner = "androidx.test:runner:1.4.0"

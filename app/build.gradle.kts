@@ -117,6 +117,7 @@ dependencies {
     implementation(Depends.Kotlin.stdlib)
     implementation(Depends.Kotlin.coroutines) // added
     implementation(Depends.Kotlin.coroutinesRx2) // added
+    implementation(Depends.Kotlin.coroutinesPlayServices) // added
     implementation(Depends.AndroidX.core)
 
 //==================== Network ====================
@@ -140,6 +141,7 @@ dependencies {
     implementation(Depends.AndroidX.emoji)
     implementation(Depends.AndroidX.Room.runtime)
     implementation(Depends.AndroidX.Room.rxjava2)
+    implementation(Depends.AndroidX.Room.ktx) // added
     kapt(Depends.AndroidX.Room.compiler)
 
 //==================== Structure ====================

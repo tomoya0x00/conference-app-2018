@@ -5,9 +5,6 @@ import android.app.NotificationManager
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import io.github.droidkaigi.confsched2018.data.api.DroidKaigiApi
-import io.github.droidkaigi.confsched2018.data.db.FavoriteDatabase
-import io.github.droidkaigi.confsched2018.data.db.SessionDatabase
 import io.github.droidkaigi.confsched2018.data.repository.SessionDataRepository
 import io.github.droidkaigi.confsched2018.data.repository.SessionRepository
 import io.github.droidkaigi.confsched2018.util.rx.AppSchedulerProvider
@@ -20,13 +17,8 @@ import javax.inject.Singleton
 
     @Singleton @Provides @JvmStatic
     fun provideSessionRepository(
-        api: DroidKaigiApi,
-        sessionDatabase: SessionDatabase,
-        favoriteDatabase: FavoriteDatabase,
-        schedulerProvider: SchedulerProvider
-    ): SessionRepository =
-        SessionDataRepository(api, sessionDatabase, favoriteDatabase,
-            schedulerProvider)
+        sessionDataRepository: SessionDataRepository
+    ): SessionRepository = sessionDataRepository
 
     @Singleton @Provides @JvmStatic
     fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
