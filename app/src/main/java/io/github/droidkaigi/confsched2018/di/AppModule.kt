@@ -7,8 +7,6 @@ import dagger.Module
 import dagger.Provides
 import io.github.droidkaigi.confsched2018.data.repository.SessionDataRepository
 import io.github.droidkaigi.confsched2018.data.repository.SessionRepository
-import io.github.droidkaigi.confsched2018.util.rx.AppSchedulerProvider
-import io.github.droidkaigi.confsched2018.util.rx.SchedulerProvider
 import javax.inject.Singleton
 
 @Module internal object AppModule {
@@ -19,9 +17,6 @@ import javax.inject.Singleton
     fun provideSessionRepository(
         sessionDataRepository: SessionDataRepository
     ): SessionRepository = sessionDataRepository
-
-    @Singleton @Provides @JvmStatic
-    fun provideSchedulerProvider(): SchedulerProvider = AppSchedulerProvider()
 
     @Singleton
     @Provides

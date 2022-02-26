@@ -2,7 +2,6 @@ object Depends {
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.0" // added
-        const val coroutinesRx2 = "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.6.0" // added
         const val coroutinesPlayServices = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.0" // added
     }
 
@@ -14,7 +13,6 @@ object Depends {
     object Retrofit {
         const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val converterMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.retrofit}"
-        const val adapterRxJava2 = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     }
 
     object Kotshi {
@@ -36,7 +34,6 @@ object Depends {
 
         object Room {
             const val runtime = "androidx.room:room-runtime:${Versions.room}"
-            const val rxjava2 = "androidx.room:room-rxjava2:${Versions.room}"
             const val compiler = "androidx.room:room-compiler:${Versions.room}"
             const val ktx = "androidx.room:room-ktx:${Versions.room}" // added
         }
@@ -47,14 +44,6 @@ object Depends {
     }
 
     const val material = "com.google.android.material:material:1.4.0"
-
-    object RxJava2 {
-        const val core = "io.reactivex.rxjava2:rxjava:2.2.21"
-        const val android = "io.reactivex.rxjava2:rxandroid:2.1.1"
-        const val kotlin = "io.reactivex.rxjava2:rxkotlin:2.4.0"
-    }
-
-    const val rxbroadcast = "com.cantrowitz:rxbroadcast:2.0.0"
 
     object Dagger {
         const val core = "com.google.dagger:dagger:${Versions.dagger}"

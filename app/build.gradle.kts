@@ -116,7 +116,6 @@ dependencies {
     // Kotlin
     implementation(Depends.Kotlin.stdlib)
     implementation(Depends.Kotlin.coroutines) // added
-    implementation(Depends.Kotlin.coroutinesRx2) // added
     implementation(Depends.Kotlin.coroutinesPlayServices) // added
     implementation(Depends.AndroidX.core)
 
@@ -126,7 +125,6 @@ dependencies {
 
     implementation(Depends.Retrofit.core)
     implementation(Depends.Retrofit.converterMoshi)
-    implementation(Depends.Retrofit.adapterRxJava2)
 
 //==================== AndroidX ====================
 
@@ -140,7 +138,6 @@ dependencies {
     implementation(Depends.AndroidX.constraint)
     implementation(Depends.AndroidX.emoji)
     implementation(Depends.AndroidX.Room.runtime)
-    implementation(Depends.AndroidX.Room.rxjava2)
     implementation(Depends.AndroidX.Room.ktx) // added
     kapt(Depends.AndroidX.Room.compiler)
 
@@ -149,11 +146,6 @@ dependencies {
     kapt(Depends.Kotshi.compiler)
 
     implementation(Depends.material)
-
-    implementation(Depends.RxJava2.core)
-    implementation(Depends.RxJava2.android)
-    implementation(Depends.RxJava2.kotlin)
-    implementation(Depends.rxbroadcast)
 
     implementation(Depends.Dagger.core)
     implementation(Depends.Dagger.android)

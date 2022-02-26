@@ -10,7 +10,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.threeten.bp.Instant
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
@@ -42,7 +41,6 @@ open class NetworkModule {
                 .add(ApplicationJsonAdapterFactory)
                 .add(Instant::class.java, InstantAdapter())
                 .build()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .build()
     }
 
@@ -55,7 +53,6 @@ open class NetworkModule {
                 .add(ApplicationJsonAdapterFactory)
                 .add(Instant::class.java, InstantAdapter())
                 .build()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .build()
     }
 
@@ -67,7 +64,6 @@ open class NetworkModule {
                 .add(ApplicationJsonAdapterFactory)
                 .add(Instant::class.java, InstantAdapter())
                 .build()))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
             .client(okHttpClient)
             .build()
     }
