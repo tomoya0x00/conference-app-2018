@@ -10,6 +10,7 @@ import io.github.droidkaigi.confsched2018.databinding.ActivityMainBinding
 import io.github.droidkaigi.confsched2018.di.ViewModelFactory
 import io.github.droidkaigi.confsched2018.presentation.common.activity.BaseActivity
 import io.github.droidkaigi.confsched2018.presentation.common.menu.DrawerMenu
+import io.github.droidkaigi.confsched2018.presentation.dummy.DummyActivity
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
@@ -32,6 +33,10 @@ class MainActivity : BaseActivity() {
         drawerMenu.setup(binding.drawerLayout, binding.drawer, binding.toolbar, true)
 
         navigationController.navigateToSessions()
+
+        // 新規にHilt使っているActivityを呼び出して、正常に起動するか試している
+        val intent = Intent(this, DummyActivity::class.java)
+        startActivity(intent)
     }
 
     override fun onBackPressed() {

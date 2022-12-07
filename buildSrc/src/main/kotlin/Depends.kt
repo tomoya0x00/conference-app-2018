@@ -22,9 +22,9 @@ object Depends {
     }
 
     object AndroidX {
-        const val core = "androidx.core:core-ktx:1.7.0"
-        const val fragment = "androidx.fragment:fragment-ktx:1.4.0"
-        const val activity = "androidx.activity:activity-ktx:1.4.0"
+        const val core = "androidx.core:core-ktx:1.9.0"
+        const val fragment = "androidx.fragment:fragment-ktx:1.5.4"
+        const val activity = "androidx.activity:activity-ktx:1.6.1"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
         const val reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:${Versions.lifecycle}"

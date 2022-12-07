@@ -1,5 +1,5 @@
 object Versions {
-    const val compileSdk = 31
+    const val compileSdk = 33
     const val minSdk = 23
     const val targetSdk = 30
     const val gradleBuildTool = "7.1.1"
