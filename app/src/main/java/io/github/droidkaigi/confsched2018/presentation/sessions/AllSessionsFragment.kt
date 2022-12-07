@@ -86,6 +86,7 @@ class AllSessionsFragment
                 is Result.Failure -> {
                     Timber.e(result.e)
                 }
+                else -> Unit
             }
         })
         allSessionsViewModel.isLoading.observe(this, { isLoading ->
@@ -103,6 +104,7 @@ class AllSessionsFragment
                         }
                     }.show()
                 }
+                else -> Unit
             }
         })
         lifecycle.addObserver(allSessionsViewModel)

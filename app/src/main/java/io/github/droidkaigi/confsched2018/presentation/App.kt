@@ -12,15 +12,16 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
+import dagger.hilt.EntryPoints
+import dagger.hilt.android.HiltAndroidApp
 import io.github.droidkaigi.confsched2018.R
-import io.github.droidkaigi.confsched2018.di.DaggerAppComponent
-import io.github.droidkaigi.confsched2018.di.DatabaseModule
-import io.github.droidkaigi.confsched2018.di.NetworkModule
+import io.github.droidkaigi.confsched2018.di.AppComponent
 import io.github.droidkaigi.confsched2018.presentation.common.notification.initNotificationChannel
 import io.github.droidkaigi.confsched2018.service.push.processor.NewPostProcessor
 import timber.log.Timber
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 
+@HiltAndroidApp
 @SuppressLint("Registered")
 open class App : DaggerApplication() {
 
@@ -87,12 +88,12 @@ open class App : DaggerApplication() {
         initNotificationChannel()
     }
 
+    private val appComponent: AppComponent by lazy {
+        EntryPoints.get(this, AppComponent::class.java)
+    }
+
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder()
-            .application(this)
-            .networkModule(NetworkModule.instance)
-            .databaseModule(DatabaseModule.instance)
-            .build()
+        return appComponent
     }
 
     protected open fun isInUnitTests() = false

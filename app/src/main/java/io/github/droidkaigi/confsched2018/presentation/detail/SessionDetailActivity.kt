@@ -55,6 +55,7 @@ class SessionDetailActivity :
                 is Result.Failure -> {
                     Timber.e(result.e)
                 }
+                else -> Unit
             }
         }
 

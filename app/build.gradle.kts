@@ -5,6 +5,7 @@ plugins {
     id("com.android.application") version Versions.gradleBuildTool
     kotlin("android") version Versions.kotlin
     kotlin("kapt") version Versions.kotlin
+    id("dagger.hilt.android.plugin") version Versions.dagger
     id("org.jlleitschuh.gradle.ktlint") version Versions.ktlintGradle
     id("com.google.android.gms.oss-licenses-plugin") version Versions.ossLicenses
     id("com.github.ben-manes.versions") version Versions.gradleVersions
@@ -38,6 +39,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += mapOf("room.schemaLocation" to "$projectDir/schemas")
+                arguments += mapOf("dagger.hilt.disableModulesHaveInstallInCheck" to "true")
             }
         }
     }
@@ -157,6 +159,9 @@ dependencies {
     implementation(Depends.Dagger.androidSupport)
     kapt(Depends.Dagger.compiler)
     kapt(Depends.Dagger.androidProcessor)
+
+    implementation("com.google.dagger:hilt-android:${Versions.dagger}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.dagger}")
 
     implementation(Depends.PlayService.map)
 
