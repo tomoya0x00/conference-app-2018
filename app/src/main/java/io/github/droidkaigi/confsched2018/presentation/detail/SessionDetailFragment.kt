@@ -62,6 +62,7 @@ class SessionDetailFragment : DaggerFragment() {
                 is Result.Failure -> {
                     Timber.e(result.e)
                 }
+                else -> Unit
             }
         }
 

@@ -28,6 +28,9 @@ pluginManagement {
                 case 'deploygate':
                     useModule("com.deploygate:gradle:${requested.version}")
                     break
+                case 'dagger.hilt.android.plugin':
+                    useModule("com.google.dagger:hilt-android-gradle-plugin:${requested.version}")
+                    break
             }
         }
     }
